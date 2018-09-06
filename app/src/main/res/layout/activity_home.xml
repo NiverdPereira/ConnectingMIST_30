@@ -27,7 +27,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:drawableStart="@drawable/ic_action_feed"
+                android:drawableLeft="@drawable/ic_action_feed"
                 android:text="NewsFeed"
                 android:textColor="#000222"
                 android:textSize="21sp" />
