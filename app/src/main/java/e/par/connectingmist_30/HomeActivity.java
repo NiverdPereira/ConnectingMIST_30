@@ -44,6 +44,7 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent clubIntent= new Intent(HomeActivity.this,ClubActivity.class);
+                startActivity(clubIntent);
             }
         });
     }
