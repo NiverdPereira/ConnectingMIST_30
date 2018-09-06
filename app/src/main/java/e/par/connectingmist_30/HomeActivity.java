@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.view.View;
 
+import e.par.connectingmist_30.Newsfeed_Notice.NewsfeedActivity;
+import e.par.connectingmist_30.Newsfeed_Notice.NoticeActivity;
+
 public class HomeActivity extends AppCompatActivity {
     private CardView newsfeed,location,notice,club;
 
@@ -20,7 +23,8 @@ public class HomeActivity extends AppCompatActivity {
         newsfeed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent feedIntent;
+                Intent feedIntent=new Intent(HomeActivity.this, NewsfeedActivity.class);
+                startActivity(feedIntent);
             }
         });
         location.setOnClickListener(new View.OnClickListener() {
@@ -32,7 +36,8 @@ public class HomeActivity extends AppCompatActivity {
         notice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent noticeIntent;
+                Intent noticeIntent=new Intent(HomeActivity.this, NoticeActivity.class);
+                startActivity(noticeIntent);
             }
         });
         club.setOnClickListener(new View.OnClickListener() {
