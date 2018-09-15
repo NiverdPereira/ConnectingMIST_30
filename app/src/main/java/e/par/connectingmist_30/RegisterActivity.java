@@ -66,7 +66,7 @@ public class RegisterActivity extends AppCompatActivity {
         uInfo=new UserInfo(sName,sDept,sRoll,sEmail,sSession);
     }
     protected void createAccountandSaveInfo(){
-        pBar.setMessage("Creating");
+        pBar.setMessage("Creating Account");
         pBar.show();
         mAuth.createUserWithEmailAndPassword(sEmail,sPassword).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
