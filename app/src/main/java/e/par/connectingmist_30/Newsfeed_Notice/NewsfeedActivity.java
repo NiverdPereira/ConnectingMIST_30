@@ -23,7 +23,7 @@ import android.widget.Toast;
 
 import e.par.connectingmist_30.HomeActivity;
 import e.par.connectingmist_30.Login;
-import e.par.connectingmist_30.Nav_Drawer.NavNewsfeed;
+//import e.par.connectingmist_30.Nav_Drawer.NavNewsfeed;
 import e.par.connectingmist_30.R;
 
 public class NewsfeedActivity extends AppCompatActivity {
