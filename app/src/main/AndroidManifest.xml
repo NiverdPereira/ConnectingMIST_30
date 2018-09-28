@@ -23,6 +23,7 @@
         <activity android:name=".Newsfeed_Notice.NoticeActivity"/>
         <activity android:name=".ClubActivity"/>
         <activity android:name=".Newsfeed_Notice.NewsfeedActivity"/>
+        <activity android:name=".Club_activity.ClubMCCActivity"/>
 
     </application>
 

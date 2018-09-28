@@ -31,8 +31,8 @@ public class ClubActivity extends AppCompatActivity {
         mccCV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent mccIntent=new Intent(ClubActivity.this, ClubMCCActivity.class);
-                startActivity(mccIntent);
+                Intent mcIntent=new Intent(ClubActivity.this, ClubMCCActivity.class);
+                startActivity(mcIntent);
             }
         });
 
