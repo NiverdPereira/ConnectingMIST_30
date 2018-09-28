@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "924081496132",
+    "firebase_url": "https://connectingmist30.firebaseio.com",
+    "project_id": "connectingmist30",
+    "storage_bucket": "connectingmist30.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:924081496132:android:536ebeb1408c522d",
+        "android_client_info": {
+          "package_name": "e.par.connectingmist_30"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "924081496132-6vjo7e9blq82n35ia887820s7pklto5c.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "e.par.connectingmist_30",
+            "certificate_hash": "be7b11099e2b24db6689098b22dc070dc2272bb6"
+          }
+        },
+        {
+          "client_id": "924081496132-df2e9inf8g824tecj9ipsbsl1579b78v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCp-qWaetbQoaXH0b3w2MmiTyTzk9Gq85g"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "924081496132-df2e9inf8g824tecj9ipsbsl1579b78v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
