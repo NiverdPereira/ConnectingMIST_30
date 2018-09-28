@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.view.View;
 
+import e.par.connectingmist_30.Club_activity.ClubMCCActivity;
 import e.par.connectingmist_30.Newsfeed_Notice.NewsfeedActivity;
 import e.par.connectingmist_30.Newsfeed_Notice.NoticeActivity;
 
@@ -45,7 +46,7 @@ public class HomeActivity extends AppCompatActivity {
         club.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent clubIntent= new Intent(HomeActivity.this,ClubActivity.class);
+                Intent clubIntent= new Intent(HomeActivity.this, ClubActivity.class);
                 startActivity(clubIntent);
             }
         });

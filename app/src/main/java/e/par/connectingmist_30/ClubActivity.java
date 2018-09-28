@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.view.View;
 
+import e.par.connectingmist_30.Club_activity.ClubMCCActivity;
+
 public class ClubActivity extends AppCompatActivity {
 
     private CardView mccCV,mdfsCV,mlcCV,mrcCV,mpsCV;
@@ -19,12 +21,21 @@ public class ClubActivity extends AppCompatActivity {
         mlcCV=findViewById(R.id.mlcCard);
         mrcCV=findViewById(R.id.mrcCard);
         mpsCV=findViewById(R.id.mpsCard);
+        /*mccCV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent mccIntent = new Intent( ClubActivity.this, ClubMCCActivity.class );
+                startActivity( mccIntent );
+            }
+        });*/
         mccCV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent mccIntent;
+                Intent mccIntent=new Intent(ClubActivity.this, ClubMCCActivity.class);
+                startActivity(mccIntent);
             }
         });
+
         mdfsCV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
