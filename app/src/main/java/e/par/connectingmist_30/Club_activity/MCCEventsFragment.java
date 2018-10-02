@@ -18,8 +18,11 @@ import e.par.connectingmist_30.R;
 
 public class MCCEventsFragment extends Fragment {
 
+    int t;
 
     String[] names = { "Event1", "Event2", "Event3", "Event4", "Event5","Event6" };
+    String[] mccnames = { "mccEvent1", "mccEvent2", "mccEvent3", "mccEvent4", "mccEvent5","mccEvent6" };
+    String[] mlcnames = { "mlcEvent1", "mlcEvent2", "mlcEvent3", "mlcEvent4", "mlcEvent5","mlcEvent6" };
     String[] locations = { "Description1", "Description2", "Description3", "Description4",
             "Description5", "Description6" };
     int[] images = { R.mipmap.ic_launcher_round };
@@ -28,6 +31,9 @@ public class MCCEventsFragment extends Fragment {
         // Required empty public constructor
     }
 
+    public void setT(int t) {
+        this.t = t;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -59,7 +65,11 @@ public class MCCEventsFragment extends Fragment {
         public View getView(int position, View convertView, ViewGroup parent) {
             View v=((Activity)getContext()).getLayoutInflater().inflate(R.layout.mcceventadapter,null);
             TextView txt1 = (TextView) v.findViewById(R.id.textView1);
-            txt1.setText(names[position]);
+
+            if(t==1)
+                txt1.setText(mccnames[position]);
+            else if(t==2)
+                txt1.setText( mlcnames[position] );
             TextView txt2 = (TextView) v.findViewById(R.id.textView2);
             txt2.setText(locations[position]);
             ImageView img = (ImageView) v.findViewById(R.id.imageView1);

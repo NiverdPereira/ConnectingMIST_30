@@ -7,17 +7,21 @@ import android.support.v4.app.FragmentPagerAdapter;
 public class MCCPageAdapter extends FragmentPagerAdapter {
 
     private int numOfTabs;
+    int st;
 
-    MCCPageAdapter(FragmentManager fm, int numOfTabs) {
+    MCCPageAdapter(FragmentManager fm, int numOfTabs, int st) {
         super(fm);
         this.numOfTabs = numOfTabs;
+        this.st=st;
     }
 
     @Override
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return new MCCEventsFragment();
+                MCCEventsFragment mf= new MCCEventsFragment();
+                mf.setT( st );
+                return mf;
             case 1:
                 return new MCCNewsFragment();
             case 2:

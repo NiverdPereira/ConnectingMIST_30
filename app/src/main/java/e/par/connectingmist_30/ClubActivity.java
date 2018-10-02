@@ -32,6 +32,8 @@ public class ClubActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent mcIntent=new Intent(ClubActivity.this, ClubMCCActivity.class);
+                int intValue =2;
+                mcIntent.putExtra("VariableName", intValue);
                 startActivity(mcIntent);
             }
         });
