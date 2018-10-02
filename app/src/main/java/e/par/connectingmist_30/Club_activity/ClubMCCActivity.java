@@ -31,10 +31,23 @@ public class ClubMCCActivity extends AppCompatActivity {
 
 
         toolbar =  findViewById(R.id.toolbar);
+        Intent mIntent = getIntent();
+        int intValue = mIntent.getIntExtra("VariableName", 0);
 
         //if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
         //toolbar.setTitle(getResources().getString(R.string.app_name));
-        toolbar.setTitle("Mist Computer Club");
+        if(intValue==1)
+            toolbar.setTitle("Mist Computer Club");
+        else if(intValue==2)
+            toolbar.setTitle("Mist Literature Club");
+        else if(intValue==3)
+            toolbar.setTitle("Mist Drama and Film Society");
+        else if(intValue==4)
+            toolbar.setTitle("Mist Robotics Club");
+        else if(intValue==5)
+            toolbar.setTitle("Mist Photographic Society");
+
+
         //}
 //        setSupportActionBar(toolbar);
 
@@ -44,8 +57,7 @@ public class ClubMCCActivity extends AppCompatActivity {
         tabCalls = findViewById(R.id.tabCalls);
         viewPager = findViewById(R.id.viewPager);
 
-        Intent mIntent = getIntent();
-        int intValue = mIntent.getIntExtra("VariableName", 0);
+
 
         MCCPageAdapter = new MCCPageAdapter(getSupportFragmentManager(), tabLayout.getTabCount(),intValue);
         viewPager.setAdapter( MCCPageAdapter );

@@ -19,13 +19,17 @@ public class MCCPageAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                MCCEventsFragment mf= new MCCEventsFragment();
+                EventsFragment mf= new EventsFragment();
                 mf.setT( st );
                 return mf;
             case 1:
-                return new MCCNewsFragment();
+                MCCNewsFragment nf= new MCCNewsFragment();
+                nf.setT( st );
+                return nf;
             case 2:
-                return new MCCStatusFragment();
+                MCCStatusFragment sf= new MCCStatusFragment();
+                sf.setT( st );
+                return sf;
             default:
                 return null;
         }

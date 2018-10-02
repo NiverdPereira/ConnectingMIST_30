@@ -32,34 +32,48 @@ public class ClubActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent mcIntent=new Intent(ClubActivity.this, ClubMCCActivity.class);
-                int intValue =2;
+                int intValue =1;
                 mcIntent.putExtra("VariableName", intValue);
                 startActivity(mcIntent);
             }
         });
 
+        mlcCV.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent mlcIntent=new Intent(ClubActivity.this, ClubMCCActivity.class);
+                int intValue =2;
+                mlcIntent.putExtra("VariableName", intValue);
+                startActivity(mlcIntent);
+            }
+        } );
+
         mdfsCV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent mdfsIntent;
+                Intent mdfsIntent=new Intent(ClubActivity.this, ClubMCCActivity.class);
+                int intValue =3;
+                mdfsIntent.putExtra("VariableName", intValue);
+                startActivity(mdfsIntent);
             }
         });
-        mlcCV.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent mlcIntent;
-            }
-        });
+
         mrcCV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent mrcIntent;
+                Intent mrcIntent=new Intent(ClubActivity.this, ClubMCCActivity.class);
+                int intValue =4;
+                mrcIntent.putExtra("VariableName", intValue);
+                startActivity(mrcIntent);
             }
         });
         mpsCV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent mpsIntent;
+                Intent mpsIntent=new Intent(ClubActivity.this, ClubMCCActivity.class);
+                int intValue =5;
+                mpsIntent.putExtra("VariableName", intValue);
+                startActivity(mpsIntent);
             }
         });
     }
