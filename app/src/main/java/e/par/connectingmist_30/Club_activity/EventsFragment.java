@@ -2,14 +2,22 @@ package e.par.connectingmist_30.Club_activity;
 
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -32,7 +40,7 @@ public class EventsFragment extends Fragment {
     String[] mdfsdescriptions = { "Description1", "Description2", "Description3", "Description4", "Description5", "Description6" };
     String[] mrcdescriptions = { "Description1", "Description2", "Description3", "Description4", "Description5", "Description6" };
     String[] mpsdescriptions = { "Description1", "Description2", "Description3", "Description4", "Description5", "Description6" };
-    int[] images = { R.mipmap.ic_launcher_round };
+    int[] images = { R.drawable.event };
 
     public EventsFragment() {
         // Required empty public constructor
@@ -58,7 +66,79 @@ public class EventsFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_mccevents, container, false);
         ListView li=(ListView)v.findViewById(R.id.listView1);
         li.setAdapter(new Adapter(getActivity(), R.layout.mcceventadapter,events));
+
+        li.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+
+                String msg= "";
+                String head = "";
+                if(t==1)
+                {
+                    head= head+mccevents[position];
+                    msg=msg+mccdescriptions[position];
+                }
+                else if(t==2)
+                {
+                    head= head+mlcevents[position];
+                    msg=msg+mlcdescriptions[position];
+                }
+                else if(t==3)
+                {
+                    head= head+mdfsevents[position];
+                    msg=msg+mdfsdescriptions[position];
+                }
+                else if(t==4)
+                {
+                    head= head+mrcevents[position];
+                    msg=msg+mrcdescriptions[position];
+                }
+                else if(t==5)
+                {
+                    head= head+mpsevents[position];
+                    msg=msg+mpsdescriptions[position];
+                }
+                openDialog(head,msg);
+            }
+        });
+
         return v;
+    }
+
+    public void openDialog(String head,String msg1) {
+
+        AlertDialog alertDialog = new AlertDialog.Builder(getContext()).create();
+        // Set Custom Title
+        TextView title = new TextView(getContext());
+        // Title Properties
+        title.setText(head);
+        title.setPadding(10, 10, 10, 10);   // Set Position
+        title.setGravity(Gravity.CENTER);
+        title.setTextColor(Color.BLACK);
+        title.setTextSize(20);
+        alertDialog.setCustomTitle(title);
+        // Set Message
+        TextView msg = new TextView(getContext());
+        // Message Properties
+        msg.setText(msg1);
+        msg.setGravity(Gravity.CENTER_HORIZONTAL);
+        msg.setTextColor(Color.BLACK);
+        alertDialog.setView(msg);
+        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL,"OK", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                // Perform Action on Button
+            }
+        });
+        new Dialog(getContext());
+        alertDialog.show();
+        final Button okBT = alertDialog.getButton(AlertDialog.BUTTON_NEUTRAL);
+        LinearLayout.LayoutParams neutralBtnLP = (LinearLayout.LayoutParams) okBT.getLayoutParams();
+        neutralBtnLP.gravity = Gravity.FILL_HORIZONTAL;
+        okBT.setPadding(500, 10, 10, 10);   // Set Position
+        okBT.setTextColor(Color.BLUE);
+        okBT.setLayoutParams(neutralBtnLP);
     }
 
 
@@ -72,33 +152,33 @@ public class EventsFragment extends Fragment {
         public View getView(int position, View convertView, ViewGroup parent) {
             View v=((Activity)getContext()).getLayoutInflater().inflate(R.layout.mcceventadapter,null);
             TextView txt1 = (TextView) v.findViewById(R.id.textView1);
-            TextView txt2 = (TextView) v.findViewById(R.id.textView2);
+           // TextView txt2 = (TextView) v.findViewById(R.id.textView2);
             ImageView img = (ImageView) v.findViewById(R.id.imageView1);
 
             if(t==1)
             {
                 txt1.setText(mccevents[position]);
-                txt2.setText(mccdescriptions[position]);
+                //txt2.setText(mccdescriptions[position]);
             }
             else if(t==2)
             {
                 txt1.setText( mlcevents[position] );
-                txt2.setText(mlcdescriptions[position]);
+                //txt2.setText(mlcdescriptions[position]);
             }
             else if(t==3)
             {
                 txt1.setText( mdfsevents[position] );
-                txt2.setText(mdfsdescriptions[position]);
+                //txt2.setText(mdfsdescriptions[position]);
             }
             else if(t==4)
             {
                 txt1.setText( mrcevents[position] );
-                txt2.setText(mrcdescriptions[position]);
+                //txt2.setText(mrcdescriptions[position]);
             }
             else if(t==5)
             {
                 txt1.setText( mpsevents[position] );
-                txt2.setText(mpsdescriptions[position]);
+                //txt2.setText(mpsdescriptions[position]);
             }
 
 
