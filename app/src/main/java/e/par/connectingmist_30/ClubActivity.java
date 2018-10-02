@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.view.View;
 
-import e.par.connectingmist_30.Club_activity.ClubMCCActivity;
+import e.par.connectingmist_30.Club_activity.ClubDetailActivity;
 
 public class ClubActivity extends AppCompatActivity {
 
@@ -24,14 +24,14 @@ public class ClubActivity extends AppCompatActivity {
         /*mccCV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent mccIntent = new Intent( ClubActivity.this, ClubMCCActivity.class );
+                Intent mccIntent = new Intent( ClubActivity.this, ClubDetailActivity.class );
                 startActivity( mccIntent );
             }
         });*/
         mccCV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent mcIntent=new Intent(ClubActivity.this, ClubMCCActivity.class);
+                Intent mcIntent=new Intent(ClubActivity.this, ClubDetailActivity.class);
                 int intValue =1;
                 mcIntent.putExtra("VariableName", intValue);
                 startActivity(mcIntent);
@@ -41,7 +41,7 @@ public class ClubActivity extends AppCompatActivity {
         mlcCV.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent mlcIntent=new Intent(ClubActivity.this, ClubMCCActivity.class);
+                Intent mlcIntent=new Intent(ClubActivity.this, ClubDetailActivity.class);
                 int intValue =2;
                 mlcIntent.putExtra("VariableName", intValue);
                 startActivity(mlcIntent);
@@ -51,7 +51,7 @@ public class ClubActivity extends AppCompatActivity {
         mdfsCV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent mdfsIntent=new Intent(ClubActivity.this, ClubMCCActivity.class);
+                Intent mdfsIntent=new Intent(ClubActivity.this, ClubDetailActivity.class);
                 int intValue =3;
                 mdfsIntent.putExtra("VariableName", intValue);
                 startActivity(mdfsIntent);
@@ -61,7 +61,7 @@ public class ClubActivity extends AppCompatActivity {
         mrcCV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent mrcIntent=new Intent(ClubActivity.this, ClubMCCActivity.class);
+                Intent mrcIntent=new Intent(ClubActivity.this, ClubDetailActivity.class);
                 int intValue =4;
                 mrcIntent.putExtra("VariableName", intValue);
                 startActivity(mrcIntent);
@@ -70,7 +70,7 @@ public class ClubActivity extends AppCompatActivity {
         mpsCV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent mpsIntent=new Intent(ClubActivity.this, ClubMCCActivity.class);
+                Intent mpsIntent=new Intent(ClubActivity.this, ClubDetailActivity.class);
                 int intValue =5;
                 mpsIntent.putExtra("VariableName", intValue);
                 startActivity(mpsIntent);

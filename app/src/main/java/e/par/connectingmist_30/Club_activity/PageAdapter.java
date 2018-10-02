@@ -4,12 +4,12 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-public class MCCPageAdapter extends FragmentPagerAdapter {
+public class PageAdapter extends FragmentPagerAdapter {
 
     private int numOfTabs;
     int st;
 
-    MCCPageAdapter(FragmentManager fm, int numOfTabs, int st) {
+    PageAdapter(FragmentManager fm, int numOfTabs, int st) {
         super(fm);
         this.numOfTabs = numOfTabs;
         this.st=st;
@@ -23,11 +23,11 @@ public class MCCPageAdapter extends FragmentPagerAdapter {
                 mf.setT( st );
                 return mf;
             case 1:
-                MCCNewsFragment nf= new MCCNewsFragment();
+                NewsFragment nf= new NewsFragment();
                 nf.setT( st );
                 return nf;
             case 2:
-                MCCStatusFragment sf= new MCCStatusFragment();
+                StatusFragment sf= new StatusFragment();
                 sf.setT( st );
                 return sf;
             default:

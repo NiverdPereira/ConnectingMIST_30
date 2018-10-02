@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.view.View;
 
-import e.par.connectingmist_30.Club_activity.ClubMCCActivity;
 import e.par.connectingmist_30.Newsfeed_Notice.NewsfeedActivity;
 import e.par.connectingmist_30.Newsfeed_Notice.NoticeActivity;
 

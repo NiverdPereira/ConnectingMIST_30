@@ -12,12 +12,12 @@ import android.support.v7.widget.Toolbar;
 
 import e.par.connectingmist_30.R;
 
-public class ClubMCCActivity extends AppCompatActivity {
+public class ClubDetailActivity extends AppCompatActivity {
 
     Toolbar toolbar;
     TabLayout tabLayout;
     ViewPager viewPager;
-    MCCPageAdapter MCCPageAdapter;
+    PageAdapter MCCPageAdapter;
     TabItem tabChats;
     TabItem tabStatus;
     TabItem tabCalls;
@@ -59,7 +59,7 @@ public class ClubMCCActivity extends AppCompatActivity {
 
 
 
-        MCCPageAdapter = new MCCPageAdapter(getSupportFragmentManager(), tabLayout.getTabCount(),intValue);
+        MCCPageAdapter = new PageAdapter(getSupportFragmentManager(), tabLayout.getTabCount(),intValue);
         viewPager.setAdapter( MCCPageAdapter );
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -69,32 +69,32 @@ public class ClubMCCActivity extends AppCompatActivity {
 
                 /*if(tab.getPosition() == 1)
                 {
-                    toolbar.setBackgroundColor(ContextCompat.getColor(ClubMCCActivity.this, R.color.colorAccent));
-                    tabLayout.setBackgroundColor(ContextCompat.getColor(ClubMCCActivity.this , R.color.colorAccent));
+                    toolbar.setBackgroundColor(ContextCompat.getColor(ClubDetailActivity.this, R.color.colorAccent));
+                    tabLayout.setBackgroundColor(ContextCompat.getColor(ClubDetailActivity.this , R.color.colorAccent));
 
                     if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
                     {
-                        getWindow().setStatusBarColor(ContextCompat.getColor(ClubMCCActivity.this,R.color.colorAccent));
+                        getWindow().setStatusBarColor(ContextCompat.getColor(ClubDetailActivity.this,R.color.colorAccent));
                     }
                 }
                 else if(tab.getPosition() == 2)
                 {
-                    toolbar.setBackgroundColor(ContextCompat.getColor(ClubMCCActivity.this, R.color.colorPrimary));
-                    tabLayout.setBackgroundColor(ContextCompat.getColor(ClubMCCActivity.this , R.color.colorPrimary));
+                    toolbar.setBackgroundColor(ContextCompat.getColor(ClubDetailActivity.this, R.color.colorPrimary));
+                    tabLayout.setBackgroundColor(ContextCompat.getColor(ClubDetailActivity.this , R.color.colorPrimary));
 
                     if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
                     {
-                        getWindow().setStatusBarColor(ContextCompat.getColor(ClubMCCActivity.this,R.color.colorPrimary));
+                        getWindow().setStatusBarColor(ContextCompat.getColor(ClubDetailActivity.this,R.color.colorPrimary));
                     }
                 }
                 else if(tab.getPosition() == 3)
                 {*/
-                toolbar.setBackgroundColor( ContextCompat.getColor(ClubMCCActivity.this, R.color.colorPrimaryDark));
-                tabLayout.setBackgroundColor(ContextCompat.getColor(ClubMCCActivity.this , R.color.colorPrimaryDark));
+                toolbar.setBackgroundColor( ContextCompat.getColor(ClubDetailActivity.this, R.color.colorPrimaryDark));
+                tabLayout.setBackgroundColor(ContextCompat.getColor(ClubDetailActivity.this , R.color.colorPrimaryDark));
 
                 if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
                 {
-                    getWindow().setStatusBarColor(ContextCompat.getColor(ClubMCCActivity.this,R.color.colorPrimaryDark));
+                    getWindow().setStatusBarColor(ContextCompat.getColor(ClubDetailActivity.this,R.color.colorPrimaryDark));
                 }
                 //}
             }

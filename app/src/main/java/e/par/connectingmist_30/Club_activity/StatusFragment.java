@@ -14,10 +14,10 @@ import e.par.connectingmist_30.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MCCStatusFragment extends Fragment {
+public class StatusFragment extends Fragment {
 
     int t;
-    public MCCStatusFragment() {
+    public StatusFragment() {
         // Required empty public constructor
     }
     public void setT(int t) {

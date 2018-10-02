@@ -18,7 +18,7 @@ import e.par.connectingmist_30.R;
 /**
  * A fragment with a Google +1 button.
  */
-public class MCCNewsFragment extends Fragment {
+public class NewsFragment extends Fragment {
 
     int t;
     String[] news = { "News1", "News2", "News3", "News4", "News5","News6" };
@@ -37,7 +37,7 @@ public class MCCNewsFragment extends Fragment {
     int[] images = { R.mipmap.ic_launcher_round };
 
 
-    public MCCNewsFragment() {
+    public NewsFragment() {
         // Required empty public constructor
     }
     public void setT(int t) {
@@ -50,7 +50,7 @@ public class MCCNewsFragment extends Fragment {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_mccnews, container, false);
         ListView li=(ListView)v.findViewById(R.id.listView1);
-        li.setAdapter(new MCCNewsFragment.Adapter(getActivity(),R.layout.mcceventadapter,news));
+        li.setAdapter(new NewsFragment.Adapter(getActivity(),R.layout.mcceventadapter,news));
         return v;
     }
 
