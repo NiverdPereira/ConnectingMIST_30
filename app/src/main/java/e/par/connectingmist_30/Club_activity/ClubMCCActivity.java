@@ -1,5 +1,6 @@
 package e.par.connectingmist_30.Club_activity;
 
+import android.content.Intent;
 import android.os.Build;
 import android.support.design.widget.TabItem;
 import android.support.design.widget.TabLayout;
@@ -43,7 +44,10 @@ public class ClubMCCActivity extends AppCompatActivity {
         tabCalls = findViewById(R.id.tabCalls);
         viewPager = findViewById(R.id.viewPager);
 
-        MCCPageAdapter = new MCCPageAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
+        Intent mIntent = getIntent();
+        int intValue = mIntent.getIntExtra("VariableName", 0);
+
+        MCCPageAdapter = new MCCPageAdapter(getSupportFragmentManager(), tabLayout.getTabCount(),intValue);
         viewPager.setAdapter( MCCPageAdapter );
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
