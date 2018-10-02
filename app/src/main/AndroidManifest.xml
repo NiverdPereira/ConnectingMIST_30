@@ -36,6 +36,7 @@
         <activity android:name=".ClubActivity" />
         <activity android:name=".Newsfeed_Notice.NewsfeedActivity" />
         <activity android:name=".Newsfeed_Notice.NewsActivity" />
+        <activity android:name=".Club_activity.ClubMCCActivity" />
 
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
