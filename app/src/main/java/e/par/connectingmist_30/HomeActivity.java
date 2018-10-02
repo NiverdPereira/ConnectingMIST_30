@@ -33,7 +33,8 @@ public class HomeActivity extends AppCompatActivity {
         location.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent locIntent;
+                Intent locIntent=new Intent(HomeActivity.this,SearchActivity.class);
+                startActivity(locIntent);
             }
         });
         notice.setOnClickListener(new View.OnClickListener() {
