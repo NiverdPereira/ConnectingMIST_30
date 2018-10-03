@@ -3,56 +3,47 @@ package e.par.connectingmist_30;
 public class NewsInfo {
 
 
-    String dept,email,name,roll,session;
+    String author,content,date,headline;
 
-    public NewsInfo(String dept, String email, String name, String roll, String session) {
-        this.dept = dept;
-        this.email = email;
-        this.name = name;
-        this.roll = roll;
-        this.session = session;
+    public NewsInfo(String author, String content, String date, String headline) {
+        this.author = author;
+        this.content = content;
+        this.date = date;
+        this.headline = headline;
     }
 
     public NewsInfo() {
     }
 
-    public String getDept() {
-        return dept;
+    public String getAuthor() {
+        return author;
     }
 
-    public void setDept(String dept) {
-        this.dept = dept;
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
-    public String getEmail() {
-        return email;
+    public String getContent() {
+        return content;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setContent(String content) {
+        this.content = content;
     }
 
-    public String getName() {
-        return name;
+    public String getDate() {
+        return date;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setDate(String date) {
+        this.date = date;
     }
 
-    public String getRoll() {
-        return roll;
+    public String getHeadline() {
+        return headline;
     }
 
-    public void setRoll(String roll) {
-        this.roll = roll;
-    }
-
-    public String getSession() {
-        return session;
-    }
-
-    public void setSession(String session) {
-        this.session = session;
+    public void setHeadline(String headline) {
+        this.headline = headline;
     }
 }

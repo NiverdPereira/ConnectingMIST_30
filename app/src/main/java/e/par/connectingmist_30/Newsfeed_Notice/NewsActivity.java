@@ -28,7 +28,7 @@ public class NewsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_news);
         newsListView = findViewById(R.id.listFeed);
         allNews = new ArrayList<>();
-        refDatabase= FirebaseDatabase.getInstance().getReference("Users");
+        refDatabase= FirebaseDatabase.getInstance().getReference("NewsFeed");
         getAlldataFromDB();
     }
     private void getAlldataFromDB()
