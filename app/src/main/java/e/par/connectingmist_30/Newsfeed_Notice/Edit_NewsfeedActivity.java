@@ -8,7 +8,10 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -20,6 +23,7 @@ public class Edit_NewsfeedActivity extends AppCompatActivity {
 
     EditText date,author,headline,content;
     Button save;
+    private FirebaseAuth mAuth;
     private DatabaseReference refDatabase;
     private Newsfeed_Element newsfeed;
     String sDate,sAuthor,sHeadline,sContent;
@@ -36,6 +40,9 @@ public class Edit_NewsfeedActivity extends AppCompatActivity {
         headline=findViewById(R.id.headline);
         content=findViewById(R.id.content);
         save=findViewById(R.id.save);
+        refDatabase= FirebaseDatabase.getInstance().getReference("NewsFeed");
+
+        mAuth=FirebaseAuth.getInstance();
         // refDatabase=FirebaseDatabase.getInstance().getReference("Newsfeed");
 
 
@@ -86,7 +93,14 @@ public class Edit_NewsfeedActivity extends AppCompatActivity {
         newsfeed=new Newsfeed_Element(sDate,sAuthor,sHeadline,sContent);
     }
     void createAccountAndSaveInfo(){
-
+        FirebaseUser user = mAuth.getCurrentUser();
+       // DatabaseReference usersRef = refDatabase.child("newselements");
+        //refDatabase = FirebaseDatabase.getInstance().getReference("NewsFeed");
+       // refDatabase.child(user.getUid()).setValue(newsfeed);
+        //usersRef.setValue(newsfeed);
+        DatabaseReference d = FirebaseDatabase.getInstance().getReference("NewsFeed");   ///Give the name of folder
+        String primaryKey = d.push().getKey();
+        d.child(primaryKey).setValue(newsfeed);
 
 
     }
