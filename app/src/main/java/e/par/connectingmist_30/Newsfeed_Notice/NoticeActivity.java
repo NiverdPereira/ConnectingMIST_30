@@ -22,11 +22,13 @@ import java.util.ArrayList;
 
 import e.par.connectingmist_30.NewsAdapter;
 import e.par.connectingmist_30.NewsInfo;
+import e.par.connectingmist_30.NoticeAdapter;
+import e.par.connectingmist_30.NoticeInfo;
 import e.par.connectingmist_30.R;
 
 public class NoticeActivity extends AppCompatActivity {
     private ListView newsListView;
-    private ArrayList<NewsInfo> allNews;
+    private ArrayList<NoticeInfo> allNotice;
     private DatabaseReference refDatabase;
 
     @Override
@@ -34,7 +36,7 @@ public class NoticeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notice);
         newsListView = findViewById(R.id.listFeed);
-        allNews = new ArrayList<>();
+        allNotice = new ArrayList<>();
         refDatabase= FirebaseDatabase.getInstance().getReference("Notice");
         getAlldataFromDB();
     }
@@ -44,11 +46,11 @@ public class NoticeActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for(DataSnapshot data: dataSnapshot.getChildren()){
-                    NewsInfo value= data.getValue(NewsInfo.class);
-                    allNews.add(value);
+                    NoticeInfo value= data.getValue(NoticeInfo.class);
+                    allNotice.add(value);
                 }
-                NewsAdapter newsAdapter = new NewsAdapter(NoticeActivity.this, allNews);
-                newsListView.setAdapter(newsAdapter);
+                NoticeAdapter noticeAdapter = new NoticeAdapter(NoticeActivity.this, allNotice);
+                newsListView.setAdapter(noticeAdapter);
             }
 
             @Override

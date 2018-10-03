@@ -1,22 +1,22 @@
 package e.par.connectingmist_30;
 
 public class NoticeInfo {
-    String notice,date;
+    String details,date;
 
     public NoticeInfo(String notice, String date) {
-        this.notice = notice;
+        this.details = notice;
         this.date = date;
     }
 
     public NoticeInfo() {
     }
 
-    public String getNotice() {
-        return notice;
+    public String getDetails() {
+        return details;
     }
 
-    public void setNotice(String notice) {
-        this.notice = notice;
+    public void setDetails(String notice) {
+        this.details = notice;
     }
 
     public String getDate() {
