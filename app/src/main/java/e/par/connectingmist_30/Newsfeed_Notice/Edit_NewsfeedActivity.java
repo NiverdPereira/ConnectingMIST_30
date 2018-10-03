@@ -91,7 +91,7 @@ public class Edit_NewsfeedActivity extends AppCompatActivity {
         newsfeed=new Newsfeed_Element(sDate,sAuthor,sHeadline,sContent);
     }
     void createAccountAndSaveInfo(){
-        FirebaseUser user = mAuth.getCurrentUser();
+//        FirebaseUser user = mAuth.getCurrentUser();
        // DatabaseReference usersRef = refDatabase.child("newselements");
         //refDatabase = FirebaseDatabase.getInstance().getReference("NewsFeed");
        // refDatabase.child(user.getUid()).setValue(newsfeed);

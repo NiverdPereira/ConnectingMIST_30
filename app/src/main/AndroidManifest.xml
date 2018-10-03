@@ -37,6 +37,8 @@
         <activity android:name=".Newsfeed_Notice.NewsfeedActivity" />
         <activity android:name=".Newsfeed_Notice.NewsActivity" />
         <activity android:name=".Club_activity.ClubDetailActivity" />
+        <activity android:name=".Newsfeed_Notice.Edit_NewsfeedActivity"/>
+        <activity android:name=".Newsfeed_Notice.Edit_NoticeActivity"/>
 
 
         <!--
