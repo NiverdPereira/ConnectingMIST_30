@@ -41,24 +41,24 @@ public class NewsAdapter extends BaseAdapter {
         if(view==null){
             viewHolder=new ViewHolder();
             view=layoutInflater.inflate(R.layout.feed_item_style,null);
-            viewHolder.dept=view.findViewById(R.id.tAuthor);
-            viewHolder.name=view.findViewById(R.id.tHeader);
-            viewHolder.roll=view.findViewById(R.id.tDate);
-            viewHolder.email=view.findViewById(R.id.tContent);
+            viewHolder.author=view.findViewById(R.id.tAuthor);
+            viewHolder.headline=view.findViewById(R.id.tHeader);
+            viewHolder.date=view.findViewById(R.id.tDate);
+            viewHolder.content=view.findViewById(R.id.tContent);
             view.setTag(viewHolder);
         }
         else{
 
             viewHolder= (ViewHolder) view.getTag();
         }
-        viewHolder.name.setText(allNews.get(pos).getName());
-        viewHolder.roll.setText(allNews.get(pos).getRoll());
-        viewHolder.email.setText(allNews.get(pos).getEmail());
-        viewHolder.dept.setText(allNews.get(pos).getDept());
+        viewHolder.author.setText(allNews.get(pos).getAuthor());
+        viewHolder.content.setText(allNews.get(pos).getContent());
+        viewHolder.date.setText(allNews.get(pos).getDate());
+        viewHolder.headline.setText(allNews.get(pos).getHeadline());
         return view;
     }
     private static class ViewHolder{
-        TextView dept,email,name,roll,session;
+        TextView author,content,date,headline;
     }
     private ViewHolder viewHolder = null;
 }
