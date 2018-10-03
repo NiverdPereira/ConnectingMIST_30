@@ -16,7 +16,8 @@
             android:id="@+id/spPlaces"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="110dp"/>
+            android:layout_marginTop="110dp"
+            android:background="#667f93"/>
 
         <android.support.v7.widget.CardView
             android:id="@+id/bSearch"
@@ -24,7 +25,7 @@
             android:layout_height="45dp"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
-            app:cardBackgroundColor="#123456"
+            app:cardBackgroundColor="#6d8ca4"
             app:cardCornerRadius="25dp"
             android:layout_gravity="center_horizontal">
 
@@ -58,7 +59,7 @@
             android:layout_height="45dp"
             android:layout_marginTop="50dp"
             app:cardCornerRadius="25dp"
-            app:cardBackgroundColor="#123459"
+            app:cardBackgroundColor="#6d8ca4"
             android:layout_gravity="center_horizontal"
             >
 
