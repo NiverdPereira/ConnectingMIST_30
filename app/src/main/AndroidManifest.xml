@@ -55,7 +55,8 @@
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps" />
         <activity android:name=".SearchActivity" />
-        <activity android:name=".Newsfeed_Notice.Edit_NewsfeedActivity"></activity>
+        <activity android:name=".Newsfeed_Notice.Edit_NewsfeedActivity" />
+        <activity android:name=".Newsfeed_Notice.Edit_NoticeActivity"></activity>
     </application>
 
 </manifest>
