@@ -15,16 +15,15 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
-import e.par.connectingmist_30.Newsfeed_Notice.Newsfeed_Element;
 import e.par.connectingmist_30.R;
 
-public class Edit_NewsfeedActivity extends AppCompatActivity {
+public class Edit_NoticeActivity extends AppCompatActivity {
 
-    EditText date,author,headline,content;
+    EditText date,details;
     Button save;
     private DatabaseReference refDatabase;
-    private Newsfeed_Element newsfeed;
-    String sDate,sAuthor,sHeadline,sContent;
+    private Notice_Element notice;
+    String sDate,sDetails;
     Calendar myCalendar = Calendar.getInstance();
 
 
@@ -34,10 +33,7 @@ public class Edit_NewsfeedActivity extends AppCompatActivity {
         setContentView(R.layout.activity_newsfeed);
 
         date=findViewById(R.id.date);
-        author=findViewById(R.id.author);
-        headline=findViewById(R.id.headline);
-        content=findViewById(R.id.content);
-        save=findViewById(R.id.save);
+        details=findViewById(R.id.details);
         // refDatabase=FirebaseDatabase.getInstance().getReference("Newsfeed");
 
 
@@ -58,7 +54,7 @@ public class Edit_NewsfeedActivity extends AppCompatActivity {
         date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new DatePickerDialog(Edit_NewsfeedActivity.this, Date, myCalendar
+                new DatePickerDialog(Edit_NoticeActivity.this, Date, myCalendar
                         .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
                         myCalendar.get(Calendar.DAY_OF_MONTH)).show();
             }
@@ -79,18 +75,17 @@ public class Edit_NewsfeedActivity extends AppCompatActivity {
     }
     void getAllInputData(){
         sDate=date.getText().toString();
-        sAuthor=author.getText().toString();
-        sHeadline=headline.getText().toString();
-        sContent=content.getText().toString();
+        sDetails=details.getText().toString();
+
 
     }
     void  createStudent(){
-        newsfeed=new Newsfeed_Element(sDate,sAuthor,sHeadline,sContent);
+        notice=new Notice_Element(sDate,sDetails);
     }
     void createAccountAndSaveInfo(){
         refDatabase= FirebaseDatabase.getInstance().getReference("Newsfeed");
         String pk=refDatabase.push().getKey();
-        refDatabase.child(pk).setValue(newsfeed);
+        refDatabase.child(pk).setValue(notice);
 
     }
 
