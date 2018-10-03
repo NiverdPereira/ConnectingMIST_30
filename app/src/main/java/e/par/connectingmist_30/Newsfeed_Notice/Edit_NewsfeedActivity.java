@@ -97,8 +97,8 @@ public class Edit_NewsfeedActivity extends AppCompatActivity {
        // refDatabase.child(user.getUid()).setValue(newsfeed);
         //usersRef.setValue(newsfeed);
         DatabaseReference d = FirebaseDatabase.getInstance().getReference("NewsFeed");   ///Give the name of folder
-        String primaryKey = d.push().getKey();
-        d.child(primaryKey).setValue(newsfeed);
+        String primary = d.push().getKey();
+        d.child(primary).setValue(newsfeed);
 
 
     }
