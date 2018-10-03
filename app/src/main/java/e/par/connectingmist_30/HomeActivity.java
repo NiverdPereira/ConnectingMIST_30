@@ -1,6 +1,7 @@
 package e.par.connectingmist_30;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
@@ -17,8 +18,10 @@ import e.par.connectingmist_30.Newsfeed_Notice.NewsfeedActivity;
 import e.par.connectingmist_30.Newsfeed_Notice.NoticeActivity;
 
 public class HomeActivity extends AppCompatActivity {
-    private CardView newsfeed,location,notice,club;
+    private CardView newsfeed,location,notice,club,logout;
     private ImageView iAdmin;
+    private SharedPreferences mPreferences;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +34,8 @@ public class HomeActivity extends AppCompatActivity {
         notice=findViewById(R.id.noticeCard);
         club=findViewById(R.id.clubCard);
         iAdmin=findViewById(R.id.iAdmin);
+        logout=findViewById(R.id.logout);
+
         newsfeed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -63,6 +68,19 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 goToInsertion();
+            }
+        });
+
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mPreferences = getSharedPreferences("User", MODE_PRIVATE);
+                SharedPreferences.Editor editor = mPreferences.edit();
+                editor.clear();   // This will delete all your preferences, check how to delete just one
+                editor.commit();
+                Intent i= new Intent(HomeActivity.this,Login.class);
+                startActivity(i);
+
             }
         });
     }

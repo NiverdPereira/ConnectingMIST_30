@@ -2,6 +2,7 @@ package e.par.connectingmist_30;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -25,6 +26,7 @@ public class Login extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private ProgressDialog pdialog;
     private String email, password;
+    private SharedPreferences mPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +39,13 @@ public class Login extends AppCompatActivity {
         mail=findViewById(R.id.mailtext);
         pass=findViewById(R.id.pass);
         mAuth=FirebaseAuth.getInstance();
+        mPreferences = getSharedPreferences("User", MODE_PRIVATE);
+
+        if (mPreferences.contains("username")) {
+            Intent i= new Intent(Login.this,HomeActivity.class);
+            startActivity(i);
+        }
+
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,6 +74,9 @@ public class Login extends AppCompatActivity {
                      FirebaseUser user=mAuth.getCurrentUser();
                      Intent i= new Intent(Login.this,HomeActivity.class);
                      startActivity(i);
+                     SharedPreferences.Editor editor = mPreferences.edit();
+                     editor.putString("username", email);
+                     editor.commit();
                      Toast.makeText(getApplicationContext(),"LogInSuccess", Toast.LENGTH_SHORT).show();
                  }
                  else{
