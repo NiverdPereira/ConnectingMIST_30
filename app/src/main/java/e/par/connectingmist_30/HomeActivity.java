@@ -93,7 +93,7 @@ public class HomeActivity extends AppCompatActivity {
             String email = user.getEmail();
             //String uid = user.getUid();
             if(email.equals("admin@mist.com")){
-                Intent adminIntent=new Intent(HomeActivity.this,Edit_NewsfeedActivity.class);
+                Intent adminIntent=new Intent(HomeActivity.this,AdminMenuActivity.class);
                 Toast.makeText(this, email, Toast.LENGTH_SHORT).show();
                 startActivity(adminIntent);
             }

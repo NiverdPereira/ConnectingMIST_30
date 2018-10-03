@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.view.View;
 
+import e.par.connectingmist_30.Newsfeed_Notice.Edit_NewsfeedActivity;
+import e.par.connectingmist_30.Newsfeed_Notice.Edit_NoticeActivity;
 import e.par.connectingmist_30.R;
 
 public class AdminMenuActivity extends AppCompatActivity {
@@ -28,12 +30,15 @@ public class AdminMenuActivity extends AppCompatActivity {
         newsCV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent addNews=new Intent(AdminMenuActivity.this, Edit_NewsfeedActivity.class);
+                startActivity(addNews);
             }
         });
         noticeCV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent addNotice=new Intent(AdminMenuActivity.this, Edit_NoticeActivity.class);
+                startActivity(addNotice);
             }
         });
         mccCV.setOnClickListener(new View.OnClickListener() {

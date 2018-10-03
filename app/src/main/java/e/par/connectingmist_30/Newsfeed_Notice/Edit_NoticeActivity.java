@@ -83,7 +83,7 @@ public class Edit_NoticeActivity extends AppCompatActivity {
         notice=new Notice_Element(sDate,sDetails);
     }
     void createAccountAndSaveInfo(){
-        refDatabase= FirebaseDatabase.getInstance().getReference("Newsfeed");
+        refDatabase= FirebaseDatabase.getInstance().getReference("Notice");
         String pk=refDatabase.push().getKey();
         refDatabase.child(pk).setValue(notice);
 
