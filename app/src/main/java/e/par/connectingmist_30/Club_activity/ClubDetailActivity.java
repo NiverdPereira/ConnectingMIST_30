@@ -47,7 +47,7 @@ public class ClubDetailActivity extends AppCompatActivity {
         else if(intValue==5)
             toolbar.setTitle("Mist Photographic Society");
 
-
+        //if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
         //}
 //        setSupportActionBar(toolbar);
 

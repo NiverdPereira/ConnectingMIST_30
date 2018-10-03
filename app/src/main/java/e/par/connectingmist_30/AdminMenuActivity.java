@@ -32,8 +32,7 @@ public class AdminMenuActivity extends AppCompatActivity {
         newsCV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent adminIntent=new Intent(AdminMenuActivity.this,Edit_NewsfeedActivity.class);
-                startActivity(adminIntent);
+
             }
         });
         noticeCV.setOnClickListener(new View.OnClickListener() {
