@@ -72,8 +72,6 @@ public class HomeActivity extends AppCompatActivity {
         String email1 = user.getEmail();
         Toast.makeText(this, email1, Toast.LENGTH_SHORT).show();
         if (user != null) {
-            // Name, email address, and profile photo Url
-           // String name = user.getDisplayName();
             String email = user.getEmail();
             //String uid = user.getUid();
             if(email.equals("admin@mist.com")){
