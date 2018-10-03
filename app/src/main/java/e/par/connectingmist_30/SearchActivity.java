@@ -49,6 +49,10 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
                 else if(sShow.equals("Artificial Intelligence Lab")) bShow.setText("Tower 1 4th floor");
                 else if(sShow.equals("Commandants Office")) bShow.setText("Admin Building");
                 else if(sShow.equals("CSE Department")) bShow.setText("Tower 1 8th floor");
+                else if(sShow.equals("CSE 1st Year")) bShow.setText("Tower 2 3rd floor");
+                else if(sShow.equals("CSE 2nd Year")) bShow.setText("Tower 1 6th floor");
+                else if(sShow.equals("CSE 3rd Year")) bShow.setText("Tower 2 5th floor");
+                else if(sShow.equals("Tailor Shop")) bShow.setText("MIST Cafeteria 2nd floor");
             }
         });
     }
