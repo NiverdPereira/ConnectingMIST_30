@@ -38,7 +38,6 @@
         <activity android:name=".Newsfeed_Notice.NewsActivity" />
         <activity android:name=".Club_activity.ClubDetailActivity" />
 
-
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -57,7 +56,8 @@
         <activity android:name=".SearchActivity" />
         <activity android:name=".Newsfeed_Notice.Edit_NewsfeedActivity" />
         <activity android:name=".Newsfeed_Notice.Edit_NoticeActivity" />
-        <activity android:name=".AdminMenuActivity"></activity>
+        <activity android:name=".AdminMenuActivity" />
+        <activity android:name=".Club_activity.AddInfo"></activity>
     </application>
 
 </manifest>

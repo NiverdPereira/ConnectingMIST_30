@@ -36,6 +36,9 @@ public class HomeActivity extends AppCompatActivity {
         iAdmin=findViewById(R.id.iAdmin);
         logout=findViewById(R.id.logout);
 
+
+
+
         newsfeed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -83,6 +86,10 @@ public class HomeActivity extends AppCompatActivity {
 
             }
         });
+    }
+    @Override
+    public void onBackPressed() {
+
     }
     protected void goToInsertion()
     {

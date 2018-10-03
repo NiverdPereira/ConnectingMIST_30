@@ -65,6 +65,10 @@ public class Login extends AppCompatActivity {
     {
          email=mail.getText().toString().trim();
          password=pass.getText().toString().trim();
+         if(email.isEmpty())
+         {
+             return;
+         }
          pdialog.setMessage("Verifying");
          pdialog.show();
          mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {

@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -22,25 +23,25 @@ import e.par.connectingmist_30.R;
 
 public class Edit_NewsfeedActivity extends AppCompatActivity {
 
-    EditText date,author,headline,content;
+    EditText date, author, headline, content;
     Button save;
     private FirebaseAuth mAuth;
     private DatabaseReference refDatabase;
     private Newsfeed_Element newsfeed;
-    String sDate,sAuthor,sHeadline,sContent;
+    String sDate, sAuthor, sHeadline, sContent;
     Calendar myCalendar = Calendar.getInstance();
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit__newsfeed);
+        super.onCreate( savedInstanceState );
+        setContentView( R.layout.activity_edit__newsfeed );
 
-        date=findViewById(R.id.date);
-        author=findViewById(R.id.author);
-        headline=findViewById(R.id.headline);
-        content=findViewById(R.id.content);
-        save=findViewById(R.id.save);
+        date = findViewById( R.id.date );
+        author = findViewById( R.id.author );
+        headline = findViewById( R.id.headline );
+        content = findViewById( R.id.content );
+        save = findViewById( R.id.save );
         // refDatabase=FirebaseDatabase.getInstance().getReference("Newsfeed");
 
 
@@ -48,29 +49,26 @@ public class Edit_NewsfeedActivity extends AppCompatActivity {
         final DatePickerDialog.OnDateSetListener Date = new DatePickerDialog.OnDateSetListener() {
 
             @Override
-            public void onDateSet(DatePicker view, int year, int monthOfYear,
-                                  int dayOfMonth) {
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                 // TODO Auto-generated method stub
-                myCalendar.set(Calendar.YEAR, year);
-                myCalendar.set(Calendar.MONTH, monthOfYear);
-                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                myCalendar.set( Calendar.YEAR, year );
+                myCalendar.set( Calendar.MONTH, monthOfYear );
+                myCalendar.set( Calendar.DAY_OF_MONTH, dayOfMonth );
                 updateLabel();
             }
 
         };
-        date.setOnClickListener(new View.OnClickListener() {
+        date.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new DatePickerDialog(Edit_NewsfeedActivity.this, Date, myCalendar
-                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
-                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+                new DatePickerDialog( Edit_NewsfeedActivity.this, Date, myCalendar.get( Calendar.YEAR ), myCalendar.get( Calendar.MONTH ), myCalendar.get( Calendar.DAY_OF_MONTH ) ).show();
             }
-        });
+        } );
 
         //calender ends here
 
 
-        save.setOnClickListener(new View.OnClickListener(){
+        save.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -78,27 +76,31 @@ public class Edit_NewsfeedActivity extends AppCompatActivity {
                 createStudent();
                 createAccountAndSaveInfo();
             }
-        });
+        } );
     }
-    void getAllInputData(){
-        sDate=date.getText().toString();
-        sAuthor=author.getText().toString();
-        sHeadline=headline.getText().toString();
-        sContent=content.getText().toString();
+
+    void getAllInputData() {
+        sDate = date.getText().toString();
+        sAuthor = author.getText().toString();
+        sHeadline = headline.getText().toString();
+        sContent = content.getText().toString();
 
     }
-    void  createStudent(){
-        newsfeed=new Newsfeed_Element(sDate,sAuthor,sHeadline,sContent);
+
+    void createStudent() {
+        newsfeed = new Newsfeed_Element( sDate, sAuthor, sHeadline, sContent );
     }
-    void createAccountAndSaveInfo(){
+
+    void createAccountAndSaveInfo() {
         FirebaseUser user = mAuth.getCurrentUser();
-       // DatabaseReference usersRef = refDatabase.child("newselements");
+        // DatabaseReference usersRef = refDatabase.child("newselements");
         //refDatabase = FirebaseDatabase.getInstance().getReference("NewsFeed");
-       // refDatabase.child(user.getUid()).setValue(newsfeed);
+        // refDatabase.child(user.getUid()).setValue(newsfeed);
         //usersRef.setValue(newsfeed);
-        DatabaseReference d = FirebaseDatabase.getInstance().getReference("NewsFeed");   ///Give the name of folder
+        DatabaseReference d = FirebaseDatabase.getInstance().getReference( "NewsFeed" );   ///Give the name of folder
         String primary = d.push().getKey();
-        d.child(primary).setValue(newsfeed);
+        d.child( primary ).setValue( newsfeed );
+        Toast.makeText( this, "hoye jacce", Toast.LENGTH_SHORT ).show();
 
 
     }
@@ -106,8 +108,8 @@ public class Edit_NewsfeedActivity extends AppCompatActivity {
     //for calender
     private void updateLabel() {
         String myFormat = "MM/dd/yy"; //In which you need put here
-        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
-        date.setText(sdf.format(myCalendar.getTime()));
+        SimpleDateFormat sdf = new SimpleDateFormat( myFormat, Locale.US );
+        date.setText( sdf.format( myCalendar.getTime() ) );
         sDate = date.getText().toString().trim();
     }
 }
