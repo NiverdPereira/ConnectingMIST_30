@@ -30,7 +30,7 @@ public class Edit_NoticeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_newsfeed);
+        setContentView(R.layout.activity_edit__notice);
 
         date=findViewById(R.id.date);
         details=findViewById(R.id.details);
