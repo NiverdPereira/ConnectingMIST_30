@@ -116,9 +116,15 @@ public class HomeActivity extends AppCompatActivity {
                     case R.id.profile:
                         Toast.makeText(HomeActivity.this, "My profile",Toast.LENGTH_SHORT).show();
                     case R.id.home:
-                        Toast.makeText(HomeActivity.this, "home",Toast.LENGTH_SHORT).show();
+                        Intent hm = new Intent(HomeActivity.this,HomeActivity.class);
+                        startActivity(hm);
                     case R.id.logout:
-                        Toast.makeText(HomeActivity.this, "logged out",Toast.LENGTH_SHORT).show();
+                        mPreferences = getSharedPreferences("User", MODE_PRIVATE);
+                        SharedPreferences.Editor editor = mPreferences.edit();
+                        editor.clear();   // This will delete all your preferences, check how to delete just one
+                        editor.commit();
+                        Intent i= new Intent(HomeActivity.this,Login.class);
+                        startActivity(i);
                     default:
                         return true;
                 }
