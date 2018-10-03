@@ -10,6 +10,7 @@ import android.widget.Toast;
 import e.par.connectingmist_30.Club_activity.AddInfo;
 import e.par.connectingmist_30.Club_activity.ClubDetailActivity;
 import e.par.connectingmist_30.Newsfeed_Notice.Edit_NewsfeedActivity;
+import e.par.connectingmist_30.Newsfeed_Notice.Edit_NoticeActivity;
 import e.par.connectingmist_30.R;
 
 public class AdminMenuActivity extends AppCompatActivity {
@@ -32,12 +33,16 @@ public class AdminMenuActivity extends AppCompatActivity {
         newsCV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent editnews=new Intent(AdminMenuActivity.this,Edit_NewsfeedActivity.class);
+                startActivity(editnews);
 
             }
         });
         noticeCV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent editnotice=new Intent(AdminMenuActivity.this,Edit_NoticeActivity.class);
+                startActivity(editnotice);
 
             }
         });

@@ -117,7 +117,7 @@ public class AddNewsFragment extends Fragment {
         news=new News(sDate,sHeadline,sContent);
     }
     void createAccountAndSaveInfo(){
-        FirebaseUser user = mAuth.getCurrentUser();
+        //FirebaseUser user = mAuth.getCurrentUser();
         // DatabaseReference usersRef = refDatabase.child("newselements");
         //refDatabase = FirebaseDatabase.getInstance().getReference("NewsFeed");
         // refDatabase.child(user.getUid()).setValue(newsfeed);
