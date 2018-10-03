@@ -34,8 +34,8 @@ public class NoticeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_notice);
-        newsListView = findViewById(R.id.listFeed);
+        setContentView(R.layout.activity_notice1);
+        newsListView = findViewById(R.id.listnotice);
         allNotice = new ArrayList<>();
         refDatabase= FirebaseDatabase.getInstance().getReference("Notice");
         getAlldataFromDB();

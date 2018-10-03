@@ -34,6 +34,7 @@ public class Edit_NoticeActivity extends AppCompatActivity {
 
         date=findViewById(R.id.date);
         details=findViewById(R.id.details);
+        save=findViewById(R.id.save);
         // refDatabase=FirebaseDatabase.getInstance().getReference("Newsfeed");
 
 
