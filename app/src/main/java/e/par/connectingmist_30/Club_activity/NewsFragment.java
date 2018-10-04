@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +24,15 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+
+import e.par.connectingmist_30.HomeActivity;
 import e.par.connectingmist_30.R;
 
 /**
@@ -31,18 +41,10 @@ import e.par.connectingmist_30.R;
 public class NewsFragment extends Fragment {
 
     int t;
-    String[] news = new String[] { "News1", "News2", "News3", "News4", "News5","News6" };
-    String[] mccnews = { "mccNews1", "mccNews2", "mccNews3", "mccNews4", "mccNews5","mccNews6" };
-    String[] mlcnews = { "mlcNews1", "mlcNews2", "mlcNews3", "mlcNews4", "mlcNews5","mlcNews6" };
-    String[] mrcnews = { "mrcNews1", "mrcNews2", "mrcNews3", "mrcNews4", "mrcNews5","mrcNews6" };
-    String[] mdfsnews = { "mdfsNews1", "mdfsNews2", "mdfsNews3", "mdfsNews4", "mdfsNews5","mdfsNews6" };
-    String[] mpsnews = { "mpsNews1", "mpsNews2", "mpsNews3", "mpsNews4", "mpsNews5","mpsNews6" };
 
-    String[] mccdescriptions = { "Description1sdggggd,,,,,,,,,,,,,,,,,,,,,ssssssssssssssssssssssssssssssssss", "Description2", "Description3", "Description4", "Description5", "Description6" };
-    String[] mlcdescriptions = { "Description1", "Description2", "Description3", "Description4", "Description5", "Description6" };
-    String[] mdfsdescriptions = { "Description1", "Description2", "Description3", "Description4", "Description5", "Description6" };
-    String[] mrcdescriptions = { "Description1", "Description2", "Description3", "Description4", "Description5", "Description6" };
-    String[] mpsdescriptions = { "Description1", "Description2", "Description3", "Description4", "Description5", "Description6" };
+    private ArrayList<Events> allnews;
+    private DatabaseReference refDatabase;
+
 
     int[] images = { R.drawable.news };
 
@@ -60,48 +62,47 @@ public class NewsFragment extends Fragment {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_mccnews, container, false);
         ListView li=(ListView)v.findViewById(R.id.listView1);
-        li.setAdapter(new NewsFragment.Adapter(getActivity(),R.layout.mcceventadapter,news));
+
+        allnews = new ArrayList<>();
+        if(t==1)
+        {
+
+            refDatabase= FirebaseDatabase.getInstance().getReference("MCC_News");
+        }
+        else if(t==2)
+        {
+            refDatabase= FirebaseDatabase.getInstance().getReference("MLC_News");
+        }
+        else if(t==3)
+        {
+            refDatabase= FirebaseDatabase.getInstance().getReference("MDFS_NEWS");
+        }
+        else if(t==4)
+        {
+            refDatabase= FirebaseDatabase.getInstance().getReference("MRC_NEWS");
+        }
+        else if(t==5)
+        {
+            refDatabase= FirebaseDatabase.getInstance().getReference("MPS_NEWS");
+        }
+        getAlldataFromDB();
+        NewsFragment.Adapter adapter = new NewsFragment.Adapter(getContext(),R.layout.mcceventadapter, allnews);
+        li.setAdapter(adapter);
+
+        Toast.makeText(getContext(), "Done",Toast.LENGTH_SHORT).show();
 
         li.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-
                 String msg= "";
                 String head = "";
-                if(t==1)
-                {
-                    head= head+mccnews[position];
-                    msg=msg+mccdescriptions[position];
-                }
-                else if(t==2)
-                {
-                    head= head+mlcnews[position];
-                    msg=msg+mlcdescriptions[position];
-                }
-                else if(t==3)
-                {
-                    head= head+mdfsnews[position];
-                    msg=msg+mdfsdescriptions[position];
-                }
-                else if(t==4)
-                {
-                    head= head+mrcnews[position];
-                    msg=msg+mrcdescriptions[position];
-                }
-                else if(t==5)
-                {
-                    head= head+mpsnews[position];
-                    msg=msg+mpsdescriptions[position];
-                }
-
-
-
+                head= head+allnews.get( position ).headline;
+                msg=msg+allnews.get( position ).content;
                 openDialog(head,msg);
             }
         });
-
         return v;
     }
 
@@ -140,51 +141,49 @@ public class NewsFragment extends Fragment {
     }
 
     /// adapter for list
-    class Adapter extends ArrayAdapter {
+    public class Adapter extends ArrayAdapter<Events> {
 
-        public Adapter(Context context, int resource, String[] objects) {
-            super(context, resource, objects);
+        public Adapter(Context context,int resource, ArrayList<Events> users) {
+            super(context, resource, users);
         }
-
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            View v=((Activity)getContext()).getLayoutInflater().inflate(R.layout.mcceventadapter,null);
-            TextView txt1 = (TextView) v.findViewById(R.id.textView1);
-            //TextView txt2 = (TextView) v.findViewById(R.id.textView2);
-            ImageView img = (ImageView) v.findViewById(R.id.imageView1);
-
-            if(t==1)
-            {
-                txt1.setText(mccnews[position]);
-                //txt2.setText(mccdescriptions[position]);
+            // Get the data item for this position
+            Events user = getItem(position);
+            // Check if an existing view is being reused, otherwise inflate the view
+            if (convertView == null) {
+                convertView = LayoutInflater.from(getContext()).inflate(R.layout.mcceventadapter, parent, false);
             }
-            else if(t==2)
-            {
-                txt1.setText(mlcnews[position] );
-               // txt2.setText(mlcdescriptions[position]);
-            }
-            else if(t==3)
-            {
-                txt1.setText( mdfsnews[position] );
-                //txt2.setText(mdfsdescriptions[position]);
-            }
-            else if(t==4)
-            {
-                txt1.setText( mrcnews[position] );
-                //txt2.setText(mrcdescriptions[position]);
-            }
-            else if(t==5)
-            {
-                txt1.setText( mpsnews[position] );
-                //txt2.setText(mpsdescriptions[position]);
-            }
-
+            // Lookup view for data population
+            TextView tvHeading = (TextView) convertView.findViewById(R.id.textView1);
+            TextView tvdate = (TextView) convertView.findViewById(R.id.textView2);
+            ImageView img = (ImageView) convertView.findViewById(R.id.imageView1);
+            //TextView tvHome = (TextView) convertView.findViewById(R.id.tvHome);
+            // Populate the data into the template view using the data object
+            tvHeading.setText(user.headline.trim());
+            tvdate.setText(user.date);
             img.setBackgroundResource(images[0]);
-            return v;
+            //tvHome.setText(user.hometown);
+            // Return the completed view to render on screen
+            return convertView;
         }
-
-
     }
 
+    private void getAlldataFromDB()
+    {
+        refDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot data: dataSnapshot.getChildren()){
+                    Events value= data.getValue(Events.class);
+                    allnews.add(value);
+                }
+            }
 
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.w("TAG", "Failed to read value.", databaseError.toException());
+            }
+        });
+    }
 }

@@ -39,7 +39,7 @@ public class Login extends AppCompatActivity {
         mail=findViewById(R.id.mailtext);
         pass=findViewById(R.id.pass);
         mAuth=FirebaseAuth.getInstance();
-        mPreferences = getSharedPreferences("User", MODE_PRIVATE);
+        mPreferences = getSharedPreferences("Session", MODE_PRIVATE);
 
         if (mPreferences.contains("username")) {
             Intent i= new Intent(Login.this,HomeActivity.class);

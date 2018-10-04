@@ -67,7 +67,6 @@ public class Edit_NoticeActivity extends AppCompatActivity {
         save.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-
                 getAllInputData();
                 createStudent();
                 createAccountAndSaveInfo();
@@ -77,8 +76,6 @@ public class Edit_NoticeActivity extends AppCompatActivity {
     void getAllInputData(){
         sDate=date.getText().toString();
         sDetails=details.getText().toString();
-
-
     }
     void  createStudent(){
         notice=new Notice_Element(sDate,sDetails);

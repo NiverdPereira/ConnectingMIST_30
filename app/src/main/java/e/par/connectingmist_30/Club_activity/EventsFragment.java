@@ -9,18 +9,34 @@ import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+
+import e.par.connectingmist_30.NewsAdapter;
+import e.par.connectingmist_30.NewsInfo;
+import e.par.connectingmist_30.Newsfeed_Notice.NewsActivity;
 import e.par.connectingmist_30.R;
 
 
@@ -28,18 +44,10 @@ public class EventsFragment extends Fragment {
 
     int t;
 
-    String[] events = { "Event1", "Event2", "Event3", "Event4", "Event5","Event6" };
-    String[] mccevents = { "mccEvent1", "mccEvent2", "mccEvent3", "mccEvent4", "mccEvent5","mccEvent6" };
-    String[] mlcevents = { "mlcEvent1", "mlcEvent2", "mlcEvent3", "mlcEvent4", "mlcEvent5","mlcEvent6" };
-    String[] mdfsevents = { "mdfsEvent1", "mdfsEvent2", "mdfsEvent3", "mdfsEvent4", "mdfsEvent5","mdfsEvent6" };
-    String[] mrcevents = { "mrcEvent1", "mrcEvent2", "mrcEvent3", "mrcEvent4", "mrcEvent5","mrcEvent6" };
-    String[] mpsevents = { "mpsEvent1", "mpsEvent2", "mpsEvent3", "mpsEvent4", "mpsEvent5","mpsEvent6" };
+    private ArrayList<Events> allevents;
+    private DatabaseReference refDatabase;
 
-    String[] mccdescriptions = { "Description1", "Description2", "Description3", "Description4", "Description5", "Description6" };
-    String[] mlcdescriptions = { "Description1", "Description2", "Description3", "Description4", "Description5", "Description6" };
-    String[] mdfsdescriptions = { "Description1", "Description2", "Description3", "Description4", "Description5", "Description6" };
-    String[] mrcdescriptions = { "Description1", "Description2", "Description3", "Description4", "Description5", "Description6" };
-    String[] mpsdescriptions = { "Description1", "Description2", "Description3", "Description4", "Description5", "Description6" };
+
     int[] images = { R.drawable.event };
 
     public EventsFragment() {
@@ -53,59 +61,55 @@ public class EventsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-       /* View rootView = inflater.inflate( R.layout.fragment_events,
-                container, false);
 
-        ListView listview = (ListView) rootView.findViewById(R.id.listView1);
-       String[] items = new String[] { "Item 1", "Item 2", "Item 3" };
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1, items);
-        listview.setAdapter(adapter);
-        return rootView;*/
 
         View v = inflater.inflate(R.layout.fragment_mccevents, container, false);
         ListView li=(ListView)v.findViewById(R.id.listView1);
-        li.setAdapter(new Adapter(getActivity(), R.layout.mcceventadapter,events));
+
+        allevents = new ArrayList<>();
+        if(t==1)
+        {
+
+            refDatabase= FirebaseDatabase.getInstance().getReference("MCC_Events");
+        }
+        else if(t==2)
+        {
+            refDatabase= FirebaseDatabase.getInstance().getReference("MLC_Events");
+        }
+        else if(t==3)
+        {
+            refDatabase= FirebaseDatabase.getInstance().getReference("MDFS_Events");
+        }
+        else if(t==4)
+        {
+            refDatabase= FirebaseDatabase.getInstance().getReference("MRC_Events");
+        }
+        else if(t==5)
+        {
+            refDatabase= FirebaseDatabase.getInstance().getReference("MPS_Events");
+        }
+        getAlldataFromDB();
+        Adapter adapter = new Adapter(getContext(),R.layout.mcceventadapter, allevents);
+        li.setAdapter(adapter);
+
+        Toast.makeText(getContext(), "Done",Toast.LENGTH_SHORT).show();
 
         li.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-
                 String msg= "";
                 String head = "";
-                if(t==1)
-                {
-                    head= head+mccevents[position];
-                    msg=msg+mccdescriptions[position];
-                }
-                else if(t==2)
-                {
-                    head= head+mlcevents[position];
-                    msg=msg+mlcdescriptions[position];
-                }
-                else if(t==3)
-                {
-                    head= head+mdfsevents[position];
-                    msg=msg+mdfsdescriptions[position];
-                }
-                else if(t==4)
-                {
-                    head= head+mrcevents[position];
-                    msg=msg+mrcdescriptions[position];
-                }
-                else if(t==5)
-                {
-                    head= head+mpsevents[position];
-                    msg=msg+mpsdescriptions[position];
-                }
+                head= head+allevents.get( position ).headline.trim();
+                msg=msg+allevents.get( position ).content;
                 openDialog(head,msg);
             }
         });
-
         return v;
     }
+
+
 
     public void openDialog(String head,String msg1) {
 
@@ -141,55 +145,49 @@ public class EventsFragment extends Fragment {
         okBT.setLayoutParams(neutralBtnLP);
     }
 
+    public class Adapter extends ArrayAdapter<Events> {
 
-    class Adapter extends ArrayAdapter {
-
-        public Adapter(Context context, int resource, String[] objects) {
-            super(context, resource, objects);
+        public Adapter(Context context,int resource, ArrayList<Events> users) {
+            super(context, resource, users);
         }
-
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            View v=((Activity)getContext()).getLayoutInflater().inflate(R.layout.mcceventadapter,null);
-            TextView txt1 = (TextView) v.findViewById(R.id.textView1);
-           // TextView txt2 = (TextView) v.findViewById(R.id.textView2);
-            ImageView img = (ImageView) v.findViewById(R.id.imageView1);
-
-            if(t==1)
-            {
-                txt1.setText(mccevents[position]);
-                //txt2.setText(mccdescriptions[position]);
+            // Get the data item for this position
+            Events user = getItem(position);
+            // Check if an existing view is being reused, otherwise inflate the view
+            if (convertView == null) {
+                convertView = LayoutInflater.from(getContext()).inflate(R.layout.mcceventadapter, parent, false);
             }
-            else if(t==2)
-            {
-                txt1.setText( mlcevents[position] );
-                //txt2.setText(mlcdescriptions[position]);
-            }
-            else if(t==3)
-            {
-                txt1.setText( mdfsevents[position] );
-                //txt2.setText(mdfsdescriptions[position]);
-            }
-            else if(t==4)
-            {
-                txt1.setText( mrcevents[position] );
-                //txt2.setText(mrcdescriptions[position]);
-            }
-            else if(t==5)
-            {
-                txt1.setText( mpsevents[position] );
-                //txt2.setText(mpsdescriptions[position]);
-            }
-
-
-
-
+            // Lookup view for data population
+            TextView tvHeading = (TextView) convertView.findViewById(R.id.textView1);
+            TextView tvdate = (TextView) convertView.findViewById(R.id.textView2);
+            ImageView img = (ImageView) convertView.findViewById(R.id.imageView1);
+            //TextView tvHome = (TextView) convertView.findViewById(R.id.tvHome);
+            // Populate the data into the template view using the data object
+            tvHeading.setText(user.headline.trim());
+            tvdate.setText(user.date);
             img.setBackgroundResource(images[0]);
-            return v;
+            //tvHome.setText(user.hometown);
+            // Return the completed view to render on screen
+            return convertView;
         }
     }
 
+    private void getAlldataFromDB()
+    {
+        refDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot data: dataSnapshot.getChildren()){
+                    Events value= data.getValue(Events.class);
+                    allevents.add(value);
+                }
+            }
 
-
-
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.w("TAG", "Failed to read value.", databaseError.toException());
+            }
+        });
+    }
 }
