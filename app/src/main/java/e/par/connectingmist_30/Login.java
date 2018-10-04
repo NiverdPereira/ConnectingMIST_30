@@ -61,6 +61,12 @@ public class Login extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    public void onBackPressed() {
+
+    }
+
     void signIn()
     {
          email=mail.getText().toString().trim();
