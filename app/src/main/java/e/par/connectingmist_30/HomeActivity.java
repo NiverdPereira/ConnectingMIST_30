@@ -17,7 +17,6 @@ import android.widget.Toolbar;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
 
 import e.par.connectingmist_30.Newsfeed_Notice.Edit_NewsfeedActivity;
 import e.par.connectingmist_30.Newsfeed_Notice.NewsActivity;
@@ -35,8 +34,6 @@ public class HomeActivity extends AppCompatActivity {
     private Toolbar mt;
 
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,7 +45,7 @@ public class HomeActivity extends AppCompatActivity {
         notice=findViewById(R.id.noticeCard);
         club=findViewById(R.id.clubCard);
         iAdmin=findViewById(R.id.iAdmin);
-       // logout=findViewById(R.id.logout);
+        logout=findViewById(R.id.logout);
 
 
 
@@ -88,19 +85,6 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-//        logout.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                mPreferences = getSharedPreferences("User", MODE_PRIVATE);
-//                SharedPreferences.Editor editor = mPreferences.edit();
-//                editor.clear();   // This will delete all your preferences, check how to delete just one
-//                editor.commit();
-//                Intent i= new Intent(HomeActivity.this,Login.class);
-//                startActivity(i);
-//
-//            }
-//        });
-
         dl = (DrawerLayout)findViewById(R.id.activity_main);
         t = new ActionBarDrawerToggle(this,dl,0,0);
 
@@ -117,22 +101,23 @@ public class HomeActivity extends AppCompatActivity {
                 switch(id)
                 {
                     case R.id.profile:
-
-
                         Toast.makeText(HomeActivity.this, "My profile",Toast.LENGTH_SHORT).show();
                     case R.id.home:
                         Intent hm = new Intent(HomeActivity.this,HomeActivity.class);
                         startActivity(hm);
+                        break;
                     case R.id.logout:
-                        mPreferences = getSharedPreferences("Session", MODE_PRIVATE);
+                        mPreferences = getSharedPreferences("User", MODE_PRIVATE);
                         SharedPreferences.Editor editor = mPreferences.edit();
                         editor.clear();   // This will delete all your preferences, check how to delete just one
-                        editor.apply();
+                        editor.commit();
                         Intent i= new Intent(HomeActivity.this,Login.class);
                         startActivity(i);
+                        break;
                     default:
                         return true;
                 }
+                return true;
             }
         });
     }

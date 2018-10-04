@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#a4c2dc">
-
+    android:background="#a4c2dc"
+    android:id="@+id/activity_main">
     <TextView
         android:id="@+id/tHeader"
         android:layout_width="294dp"
@@ -31,12 +34,11 @@
         android:text="TextView"
         android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
 
-
-
     <TextView
         android:id="@+id/tDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="300dp"
         android:text="TextView" />
+
 </LinearLayout>

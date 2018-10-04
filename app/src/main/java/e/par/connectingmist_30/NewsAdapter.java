@@ -1,11 +1,16 @@
 package e.par.connectingmist_30;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.support.design.widget.NavigationView;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+import android.widget.Toolbar;
 
 import java.util.ArrayList;
 
@@ -14,6 +19,13 @@ public class NewsAdapter extends BaseAdapter {
     private Context activity;
     private ArrayList<NewsInfo> allNews = new ArrayList<>();
     private LayoutInflater layoutInflater = null;
+
+    private SharedPreferences mPreferences;
+
+    private DrawerLayout dl;
+    private ActionBarDrawerToggle t;
+    private NavigationView nv;
+    private Toolbar mt;
 
     public NewsAdapter(Context activity, ArrayList<NewsInfo> allNews) {
         this.activity = activity;
