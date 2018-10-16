@@ -13,11 +13,15 @@
         android:orientation="vertical">
 
         <Spinner
+            style="@style/SpinnerTheme"
             android:id="@+id/spPlaces"
-            android:layout_width="match_parent"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:filterTouchesWhenObscured="true"
+
             android:layout_marginTop="110dp"
-            android:background="#667f93"/>
+            />
 
         <android.support.v7.widget.CardView
             android:id="@+id/bSearch"
@@ -51,6 +55,7 @@
             android:textColor="#ccc"
             android:textSize="18sp"
             android:textStyle="bold"
+            android:shadowRadius="30dp"
             android:gravity="center"/>
 
         <android.support.v7.widget.CardView
