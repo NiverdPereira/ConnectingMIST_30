@@ -1,15 +1,22 @@
 package e.par.connectingmist_30;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toolbar;
 
 public class SearchActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
@@ -17,6 +24,15 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
     TextView bShow;
     Spinner spinner;
     String sShow;
+
+    private SharedPreferences mPreferences;
+
+
+    private DrawerLayout dl;
+    private ActionBarDrawerToggle t;
+    private NavigationView nv;
+    private Toolbar mt;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +51,43 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
             public void onClick(View v) {
                 Intent mapIntent=new Intent(SearchActivity.this,MapsActivity.class);
                 startActivity(mapIntent);
+            }
+        });
+        dl = (DrawerLayout)findViewById(R.id.activity_main);
+        t = new ActionBarDrawerToggle(this,dl,0,0);
+
+        dl.addDrawerListener(t);
+        t.syncState();
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        nv = (NavigationView)findViewById(R.id.nv);
+        nv.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int id = item.getItemId();
+                switch(id)
+                {
+                    case R.id.profile:
+                        Intent pr= new Intent(SearchActivity.this,MyprofileActivity.class);
+                        startActivity(pr);
+                        break;
+                    case R.id.home:
+                        Intent hm = new Intent(SearchActivity.this,HomeActivity.class);
+                        startActivity(hm);
+                        break;
+                    case R.id.logout:
+                        mPreferences = getSharedPreferences("User", MODE_PRIVATE);
+                        SharedPreferences.Editor editor = mPreferences.edit();
+                        editor.clear();   // This will delete all your preferences, check how to delete just one
+                        editor.commit();
+                        Intent i= new Intent(SearchActivity.this,Login.class);
+                        startActivity(i);
+                        break;
+                    default:
+                        return true;
+                }
+                return true;
             }
         });
     }
@@ -59,5 +112,12 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
 
     public void onNothingSelected(AdapterView<?> parent) {
         // Another interface callback
+    }
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if(t.onOptionsItemSelected(item))
+            return true;
+
+        return super.onOptionsItemSelected(item);
     }
 }

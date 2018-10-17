@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Club_activity.EventsFragment">
+    tools:context=".Club_activity.EventsFragment"
+    android:background="@drawable/wallpaper3">
 
     <!-- TODO: Update blank fragment layout -->
     <ListView
