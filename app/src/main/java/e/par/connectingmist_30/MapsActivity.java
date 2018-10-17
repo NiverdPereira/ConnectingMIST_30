@@ -52,11 +52,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private Marker mPerth;
     private Marker mSydney;
     private Marker mBrisbane;
+  //  Intent intent=getIntent();
+//    String map_loc=intent.getStringExtra("MAP_LOC");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+
 
          if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
           {
@@ -98,7 +101,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         LatLng osmany=new LatLng(23.838135, 90.357928);
         LatLng academic=new LatLng(23.838005, 90.358916);
         LatLng atm=new LatLng(23.838670, 90.358564);
-        float zoomLevel = 17.0f;
+        float zoomLevel = 16.0f;
         mMap.addMarker(new MarkerOptions().position(MIST).title("MIST"));
         //mMap.addMarker(new MarkerOptions().position(lala).title("lala"));
         mMap.addMarker(new MarkerOptions().position(cafe).title("MIST Cafeteria")).showInfoWindow();

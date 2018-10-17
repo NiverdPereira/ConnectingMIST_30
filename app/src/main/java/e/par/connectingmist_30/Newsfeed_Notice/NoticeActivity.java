@@ -36,7 +36,7 @@ import e.par.connectingmist_30.NoticeInfo;
 import e.par.connectingmist_30.R;
 
 public class NoticeActivity extends AppCompatActivity {
-    private ListView newsListView;
+    private ListView noticeListView;
     private ArrayList<NoticeInfo> allNotice;
     private DatabaseReference refDatabase;
 
@@ -51,7 +51,7 @@ public class NoticeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notice1);
-        newsListView = findViewById(R.id.listnotice);
+        noticeListView = findViewById(R.id.listnotice);
         allNotice = new ArrayList<>();
         refDatabase= FirebaseDatabase.getInstance().getReference("Notice");
         getAlldataFromDB();
@@ -104,7 +104,7 @@ public class NoticeActivity extends AppCompatActivity {
                     allNotice.add(value);
                 }
                 NoticeAdapter noticeAdapter = new NoticeAdapter(NoticeActivity.this, allNotice);
-                newsListView.setAdapter(noticeAdapter);
+                noticeListView.setAdapter(noticeAdapter);
             }
 
             @Override
