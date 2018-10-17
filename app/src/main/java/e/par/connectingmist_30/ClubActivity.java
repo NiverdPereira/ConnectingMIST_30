@@ -108,7 +108,9 @@ public class ClubActivity extends AppCompatActivity {
                 switch(id)
                 {
                     case R.id.profile:
-                        Toast.makeText(ClubActivity.this, "My profile",Toast.LENGTH_SHORT).show();
+                        Intent pr= new Intent(ClubActivity.this,MyprofileActivity.class);
+                        startActivity(pr);
+                        break;
                     case R.id.home:
                         Intent hm = new Intent(ClubActivity.this,HomeActivity.class);
                         startActivity(hm);

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient"
+    android:background="@drawable/wallpaper3"
     tools:context=".Login">
 
     <ImageView
@@ -27,7 +27,8 @@
         android:ems="10"
         android:hint="Email"
         android:inputType="textWebEmailAddress"
-        android:textSize="16dp" />
+        android:textSize="25dp"
+        android:fontFamily="cursive"/>
 
     <EditText
         android:id="@+id/pass"
@@ -36,7 +37,8 @@
         android:background="#11000000"
         android:drawableLeft="@drawable/ic_action_pass"
         android:ems="10"
-        android:textSize="16dp"
+        android:textSize="25dp"
+        android:fontFamily="cursive"
         android:hint="Password"
         android:inputType="textPassword"
         android:layout_marginBottom="130dp"
@@ -65,8 +67,9 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:text="Login"
+                android:fontFamily="cursive"
                 android:textColor="#fff"
-                android:textSize="18sp" />
+                android:textSize="25sp" />
             />
         </RelativeLayout>
     </android.support.v7.widget.CardView>
@@ -79,6 +82,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="123dp"
         android:layout_alignBottom="@id/cardView"
-        android:text="Register Here." />
+        android:text="Register Here."
+        android:fontFamily="cursive"
+        android:textSize="20dp"/>
 
 </RelativeLayout>

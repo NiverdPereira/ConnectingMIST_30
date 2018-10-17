@@ -57,5 +57,5 @@ public class NoticeAdapter extends BaseAdapter {
     private static class ViewHolder{
         TextView date,details;
     }
-    private NoticeAdapter.ViewHolder viewHolder = null;
+    private ViewHolder viewHolder = null;
 }

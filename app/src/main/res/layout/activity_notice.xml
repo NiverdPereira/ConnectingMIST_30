@@ -8,6 +8,20 @@
 
     tools:showIn="@layout/custom_row_notice_item">
 
+    <TextView
+        android:id="@+id/tTitle"
+        android:layout_width="match_parent"
+        android:layout_height="81dp"
+        android:background="@drawable/wallpaper3"
+        android:text="News Feed"
+        android:fontFamily="cursive"
+        android:textSize="34sp"
+        android:textColor="#ffff"
+        android:typeface="serif"
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+        android:visibility="visible"
+        android:drawableLeft="@drawable/ic_action_feed"/>
+
     <android.support.v7.widget.RecyclerView
         android:layout_width="wrap_content"
         android:layout_height="match_parent"

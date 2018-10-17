@@ -3,6 +3,20 @@
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <TextView
+        android:id="@+id/tTitle"
+        android:layout_width="match_parent"
+        android:layout_height="81dp"
+        android:background="@drawable/wallpaper3"
+        android:text="Notice"
+        android:fontFamily="cursive"
+        android:textSize="34sp"
+        android:textColor="#ffff"
+        android:typeface="serif"
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+        android:visibility="visible"
+        android:drawableLeft="@drawable/ic_action_notice"/>
+
     <ListView
         android:id="@+id/listnotice"
         android:layout_width="match_parent"

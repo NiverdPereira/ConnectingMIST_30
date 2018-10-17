@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#a4c2dc"
+    android:background="#71d9bf"
     android:id="@+id/activity_main">
     <TextView
         android:id="@+id/tHeader"
@@ -21,7 +21,7 @@
     <TextView
         android:id="@+id/tContent"
         android:layout_width="361dp"
-        android:layout_height="100dp"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:text="TextView"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
