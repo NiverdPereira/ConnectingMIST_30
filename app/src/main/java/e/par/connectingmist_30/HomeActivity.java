@@ -44,7 +44,7 @@ public class HomeActivity extends AppCompatActivity {
         location=findViewById(R.id.locCard);
         notice=findViewById(R.id.noticeCard);
         club=findViewById(R.id.clubCard);
-        iAdmin=findViewById(R.id.iAdmin);
+        //iAdmin=findViewById(R.id.iAdmin);
         logout=findViewById(R.id.logout);
 
 
@@ -78,12 +78,12 @@ public class HomeActivity extends AppCompatActivity {
                 startActivity(clubIntent);
             }
         });
-        iAdmin.setOnClickListener(new View.OnClickListener() {
+        /*iAdmin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 goToInsertion();
             }
-        });
+        });*/
 
         dl = (DrawerLayout)findViewById(R.id.activity_main);
         t = new ActionBarDrawerToggle(this,dl,0,0);
@@ -101,7 +101,9 @@ public class HomeActivity extends AppCompatActivity {
                 switch(id)
                 {
                     case R.id.profile:
-                        Toast.makeText(HomeActivity.this, "My profile",Toast.LENGTH_SHORT).show();
+                        Intent pr= new Intent(HomeActivity.this,MyprofileActivity.class);
+                        startActivity(pr);
+                        break;
                     case R.id.home:
                         Intent hm = new Intent(HomeActivity.this,HomeActivity.class);
                         startActivity(hm);
