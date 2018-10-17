@@ -55,7 +55,6 @@
             android:textColor="#ccc"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:shadowRadius="30dp"
             android:gravity="center"/>
 
         <android.support.v7.widget.CardView
