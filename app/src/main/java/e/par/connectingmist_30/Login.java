@@ -39,12 +39,20 @@ public class Login extends AppCompatActivity {
         mail=findViewById(R.id.mailtext);
         pass=findViewById(R.id.pass);
         mAuth=FirebaseAuth.getInstance();
+
         mPreferences = getSharedPreferences("Session", MODE_PRIVATE);
 
         if (mPreferences.contains("username")) {
             Intent i= new Intent(Login.this,HomeActivity.class);
             startActivity(i);
         }
+
+
+//        String s= mail.getText().toString().trim();
+//        if (mPreferences.getString( "username", "" ).equals( s )) {
+//            Intent i = new Intent( Login.this, HomeActivity.class );
+//            startActivity( i );
+//        }
 
 
         login.setOnClickListener(new View.OnClickListener() {
