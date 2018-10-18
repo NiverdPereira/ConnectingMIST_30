@@ -3,7 +3,7 @@ package e.par.connectingmist_30;
 public class NewsInfo {
 
 
-    String author,content,date,headline;
+    public String author,content,date,headline;
 
     public NewsInfo(String author, String content, String date, String headline) {
         this.author = author;

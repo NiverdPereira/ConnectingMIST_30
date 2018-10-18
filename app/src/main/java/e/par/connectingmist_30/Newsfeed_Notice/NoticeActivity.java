@@ -1,7 +1,11 @@
 package e.par.connectingmist_30.Newsfeed_Notice;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 //import android.support.design.widget.FloatingActionButton;
 //import android.support.design.widget.Snackbar;
@@ -13,10 +17,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -110,6 +119,19 @@ public class NoticeActivity extends AppCompatActivity {
                 }
                 NoticeAdapter noticeAdapter = new NoticeAdapter(NoticeActivity.this, allNotice);
                 noticeListView.setAdapter(noticeAdapter);
+
+                noticeListView.setOnItemClickListener(new AdapterView.OnItemClickListener()
+                {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view,
+                                            int position, long id) {
+                        String msg= "";
+                        String head = "";
+                        head= head+allNotice.get( position ).getDate().trim();
+                        msg=msg+allNotice.get( position ).getDetails();
+                        openDialog(head,msg);
+                    }
+                });
             }
 
             @Override
@@ -119,6 +141,40 @@ public class NoticeActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void openDialog(String head,String msg1) {
+
+        AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+        // Set Custom Title
+        TextView title = new TextView(this);
+        // Title Properties
+        title.setText(head);
+        title.setPadding(10, 10, 10, 10);   // Set Position
+        title.setGravity(Gravity.CENTER);
+        title.setTextColor(Color.BLACK);
+        title.setTextSize(20);
+        alertDialog.setCustomTitle(title);
+        // Set Message
+        TextView msg = new TextView(this);
+        // Message Properties
+        msg.setText(msg1);
+        msg.setGravity(Gravity.CENTER_HORIZONTAL);
+        msg.setTextColor(Color.BLACK);
+        alertDialog.setView(msg);
+        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL,"OK", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                // Perform Action on Button
+            }
+        });
+        new Dialog(this);
+        alertDialog.show();
+        final Button okBT = alertDialog.getButton(AlertDialog.BUTTON_NEUTRAL);
+        LinearLayout.LayoutParams neutralBtnLP = (LinearLayout.LayoutParams) okBT.getLayoutParams();
+        neutralBtnLP.gravity = Gravity.FILL_HORIZONTAL;
+        okBT.setPadding(500, 10, 10, 10);   // Set Position
+        okBT.setTextColor(Color.BLUE);
+        okBT.setLayoutParams(neutralBtnLP);
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
