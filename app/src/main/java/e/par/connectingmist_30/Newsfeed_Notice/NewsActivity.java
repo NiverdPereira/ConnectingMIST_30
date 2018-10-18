@@ -85,7 +85,7 @@ public class NewsActivity extends AppCompatActivity {
                         startActivity(hm);
                         break;
                     case R.id.logout:
-                        mPreferences = getSharedPreferences("User", MODE_PRIVATE);
+                        mPreferences = getSharedPreferences("Session", MODE_PRIVATE);
                         SharedPreferences.Editor editor = mPreferences.edit();
                         editor.clear();   // This will delete all your preferences, check how to delete just one
                         editor.commit();
