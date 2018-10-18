@@ -109,7 +109,7 @@ public class HomeActivity extends AppCompatActivity {
                         startActivity(hm);
                         break;
                     case R.id.logout:
-                        mPreferences = getSharedPreferences("User", MODE_PRIVATE);
+                        mPreferences = getSharedPreferences("Session", MODE_PRIVATE);
                         SharedPreferences.Editor editor = mPreferences.edit();
                         editor.clear();   // This will delete all your preferences, check how to delete just one
                         editor.commit();
@@ -125,7 +125,10 @@ public class HomeActivity extends AppCompatActivity {
     }
     @Override
     public void onBackPressed() {
-
+        Intent startMain = new Intent(Intent.ACTION_MAIN);
+        startMain.addCategory(Intent.CATEGORY_HOME);
+        startMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(startMain);
     }
     protected void goToInsertion()
     {
