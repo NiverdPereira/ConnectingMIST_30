@@ -31,6 +31,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
+import e.par.connectingmist_30.AboutActivity;
 import e.par.connectingmist_30.ClubActivity;
 import e.par.connectingmist_30.HomeActivity;
 import e.par.connectingmist_30.Login;
@@ -90,6 +91,10 @@ public class NewsActivity extends AppCompatActivity {
                         editor.commit();
                         Intent i= new Intent(NewsActivity.this,Login.class);
                         startActivity(i);
+                        break;
+                    case R.id.about:
+                        Intent ab= new Intent(NewsActivity.this,AboutActivity.class);
+                        startActivity(ab);
                         break;
                     default:
                         return true;

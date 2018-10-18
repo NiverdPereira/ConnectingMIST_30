@@ -107,6 +107,10 @@ public class HomeActivity extends AppCompatActivity {
                     case R.id.home:
                         Intent hm = new Intent(HomeActivity.this,HomeActivity.class);
                         startActivity(hm);
+
+                        /*Bundle bundle= new Bundle();
+                        bundle.putString("url","https://www.twitter.com/android_hunger");*/
+
                         break;
                     case R.id.logout:
                         mPreferences = getSharedPreferences("Session", MODE_PRIVATE);
@@ -115,6 +119,10 @@ public class HomeActivity extends AppCompatActivity {
                         editor.commit();
                         Intent i= new Intent(HomeActivity.this,Login.class);
                         startActivity(i);
+                        break;
+                    case R.id.about:
+                        Intent ab= new Intent(HomeActivity.this,AboutActivity.class);
+                        startActivity(ab);
                         break;
                     default:
                         return true;

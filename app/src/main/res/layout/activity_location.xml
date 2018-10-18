@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LocationActivity"
+    android:background="@drawable/wallpaper3"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Location"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="cursive"
+        android:textSize="25dp"
+        android:layout_marginBottom="20dp"/>
+
+    <TextView
+        android:id="@+id/textView15"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:textSize="15dp"
+        android:text="Military Institute of Science and Technology (MIST) is located on the northwest part of Dhaka City at Mirpur Cantonment.
+
+
+Mirpur Cantonment is well known to be the ‘Education Village’ of Bangladesh
+
+Armed Forces and a hub of knowledge for military / civil students and professionals. Prestigious institutions like, Bangladesh University of Professionals (BUP), National Defence College (NDC) and Defence Services Command and Staff College (DSCSC) are located in this cantonment.
+
+
+It’s quiet and serene environment offers very congenial academic atmosphere in all the campuses. Its picturesque surrounding with lake, overhanging trees alive with chirping birds and green fields add splendor to the panoramic beauty of Mirpur Cantonment. Nature’s bounty makes MIST an enchanting campus – ever endearing to the young." />
+</LinearLayout>
