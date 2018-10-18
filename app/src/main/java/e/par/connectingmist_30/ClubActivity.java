@@ -123,6 +123,10 @@ public class ClubActivity extends AppCompatActivity {
                         Intent i= new Intent(ClubActivity.this,Login.class);
                         startActivity(i);
                         break;
+                    case R.id.about:
+                        Intent ab= new Intent(ClubActivity.this,AboutActivity.class);
+                        startActivity(ab);
+                        break;
                     default:
                         return true;
                 }

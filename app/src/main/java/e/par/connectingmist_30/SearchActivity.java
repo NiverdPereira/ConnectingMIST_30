@@ -84,6 +84,10 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
                         Intent i= new Intent(SearchActivity.this,Login.class);
                         startActivity(i);
                         break;
+                    case R.id.about:
+                        Intent ab= new Intent(SearchActivity.this,AboutActivity.class);
+                        startActivity(ab);
+                        break;
                     default:
                         return true;
                 }

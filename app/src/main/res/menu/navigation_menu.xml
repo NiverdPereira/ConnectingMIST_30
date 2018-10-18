@@ -10,5 +10,8 @@
     <item android:id="@+id/logout"
         android:icon="@drawable/logout"
         android:title="Logout" />
+    <item android:id="@+id/about"
+        android:icon="@drawable/about"
+        android:title="About MIST" />
 
 </menu>
