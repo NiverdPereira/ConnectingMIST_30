@@ -1,22 +1,40 @@
 package e.par.connectingmist_30;
 
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.NotificationCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.StringTokenizer;
 
 import e.par.connectingmist_30.Newsfeed_Notice.Edit_NewsfeedActivity;
 import e.par.connectingmist_30.Newsfeed_Notice.NewsActivity;
@@ -27,11 +45,21 @@ public class HomeActivity extends AppCompatActivity {
     private CardView newsfeed,location,notice,club,logout;
     private ImageView iAdmin;
     private SharedPreferences mPreferences;
+    private DatabaseReference refDatabase;
 
     private DrawerLayout dl;
     private ActionBarDrawerToggle t;
     private NavigationView nv;
     private Toolbar mt;
+    Button bt11;
+    Button bt12;
+    Handler handler;
+
+    private ArrayList<NoticeInfo> allNotice;
+
+    int tt;
+    int[] p = new int[1];
+    int[] sl= new int[1];
 
 
     @Override
@@ -47,6 +75,52 @@ public class HomeActivity extends AppCompatActivity {
         //iAdmin=findViewById(R.id.iAdmin);
         logout=findViewById(R.id.logout);
 
+        refDatabase= FirebaseDatabase.getInstance().getReference("Notice");
+        allNotice = new ArrayList<>();
+
+        mPreferences = getSharedPreferences( "Session", MODE_PRIVATE );
+       // SharedPreferences.Editor editor = mPreferences.edit();
+      // editor.putString( "date", "10/04/18" );
+       // editor.commit();
+
+
+//        bt12.setOnClickListener( new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                mPreferences = getSharedPreferences( "Session", MODE_PRIVATE );
+//                SharedPreferences.Editor editor = mPreferences.edit();
+//                editor.remove("count");
+//                editor.putInt( "count", 0 );
+//                editor.putInt( "prev", 0 );
+//                editor.putInt( "flag", 0 );
+//                editor.putInt( "flagm", 0 );
+//
+//                editor.commit();
+//                allNotice.clear();
+//            }
+//        } );
+
+//        bt11.setOnClickListener( new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//            }
+//        } );
+
+        tt=0;
+
+        handler = new Handler();
+        final int delay = 5000; //milliseconds
+
+        handler.postDelayed(new Runnable(){
+            public void run(){
+                //do something
+                tt=tt+1;
+                //sendNotification( tt );
+                notifi();
+                handler.postDelayed(this, delay);
+            }
+        }, delay);
 
 
 
@@ -131,6 +205,71 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
     }
+
+    public void notifi()
+    {
+        getAlldataFromDB();
+        Date now = new Date();
+        Date current= new Date(  ),prevdate=new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yy");
+        String nowAsString = new SimpleDateFormat("MM/dd/yy").format(now);
+        try {
+            current = sdf.parse( nowAsString );
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        mPreferences = getSharedPreferences( "Session", MODE_PRIVATE );
+        String st = mPreferences.getString("date", "");
+        try {
+            prevdate = sdf.parse( st );
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        String temp;
+        Date d= new Date(  );
+        int f=0;
+        int fm=0;
+        for(int i=0;i<allNotice.size();i++) {
+            temp = allNotice.get( i ).getDate();
+            try {
+                d = sdf.parse( temp );
+                if(d.compareTo(prevdate) > 0)
+                {
+                    f++;
+                   // startService(new Intent(getApplicationContext(), NotificationService.class));
+                    sendNotification(f);
+                    SharedPreferences.Editor editor = mPreferences.edit();
+                    editor.putString( "date", nowAsString );
+                    editor.putInt( "flag", f );
+                    editor.commit();
+                    break;
+                }
+                else
+                {
+                    fm++;
+                    SharedPreferences.Editor editor = mPreferences.edit();
+                    editor.putInt( "flagm", fm );
+                    editor.commit();
+                }
+            } catch (ParseException ex) {
+            }
+        }
+    }
+
+    public void sendNotification(int tt) {
+        NotificationCompat.Builder mBuilder =
+                new NotificationCompat.Builder(this);
+        //Create the intent that’ll fire when the user taps the notification//
+        Intent intent = new Intent(this, NoticeActivity.class );
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
+        mBuilder.setContentIntent(pendingIntent);
+        mBuilder.setSmallIcon(R.drawable.ic_launcher_background);
+        mBuilder.setContentTitle("New Notice Added");
+        mBuilder.setContentText(tt+" Tap to See Notice");
+        NotificationManager mNotificationManager =
+                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        mNotificationManager.notify(001, mBuilder.build());
+    }
     @Override
     public void onBackPressed() {
         Intent startMain = new Intent(Intent.ACTION_MAIN);
@@ -138,6 +277,32 @@ public class HomeActivity extends AppCompatActivity {
         startMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(startMain);
     }
+
+    private void getAlldataFromDB()
+    {
+        p[0]=0;
+
+        refDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot data: dataSnapshot.getChildren()){
+                    NoticeInfo value= data.getValue(NoticeInfo.class);
+                    allNotice.add(value);
+                    p[0]++;
+                }
+                Toast.makeText(getApplicationContext(),"Invalid info",Toast.LENGTH_SHORT);
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.w("TAG", "Failed to read value.", databaseError.toException());
+
+            }
+        });
+
+    }
+
     protected void goToInsertion()
     {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();

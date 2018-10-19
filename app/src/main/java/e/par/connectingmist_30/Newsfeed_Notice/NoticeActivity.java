@@ -50,6 +50,7 @@ public class NoticeActivity extends AppCompatActivity {
     private ArrayList<NoticeInfo> allNotice;
     private DatabaseReference refDatabase;
 
+
     private SharedPreferences mPreferences;
 
     private DrawerLayout dl;

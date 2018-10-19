@@ -18,6 +18,9 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Login extends AppCompatActivity {
 
     CardView login;
@@ -96,6 +99,10 @@ public class Login extends AppCompatActivity {
                      Intent i= new Intent(Login.this,HomeActivity.class);
                      startActivity(i);
                      SharedPreferences.Editor editor = mPreferences.edit();
+                     Date now= new Date();
+                     String nowAsString = new SimpleDateFormat("MM/dd/yy").format(now);
+                     editor.putString( "date", nowAsString );
+                     editor.commit();
                      editor.putString("username", email);
                      editor.commit();
                      Toast.makeText(getApplicationContext(),"LogInSuccess", Toast.LENGTH_SHORT).show();
