@@ -33,9 +33,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import e.par.connectingmist_30.AboutActivity;
+import e.par.connectingmist_30.Calender_view.Notice_cal;
 import e.par.connectingmist_30.HomeActivity;
 import e.par.connectingmist_30.Login;
 import e.par.connectingmist_30.MyprofileActivity;
@@ -57,6 +59,7 @@ public class NoticeActivity extends AppCompatActivity {
     private ActionBarDrawerToggle t;
     private NavigationView nv;
     private android.widget.Toolbar mt;
+    Button nov;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +67,7 @@ public class NoticeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_notice1);
         noticeListView = findViewById(R.id.listnotice);
         allNotice = new ArrayList<>();
+        nov = findViewById( R.id.nov );
         refDatabase= FirebaseDatabase.getInstance().getReference("Notice");
         getAlldataFromDB();
 
@@ -108,6 +112,30 @@ public class NoticeActivity extends AppCompatActivity {
                 return true;
             }
         });
+
+
+        nov.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent feedIntent=new Intent(NoticeActivity.this, Notice_cal.class);
+
+
+               // feedIntent.putParcelableArrayListExtra("mylist", allNotice);
+
+
+               // feedIntent.putParcelableArrayListExtra( "mylist", allNotice );
+               // startActivity(feedIntent);
+
+               // startActivity(intent);
+
+//                ArrayList<Object> object = new ArrayList<Object>();
+//                Intent feedIntent=new Intent(NoticeActivity.this, Notice_cal.class);
+//                Bundle args = new Bundle();
+//                args.putSerializable("ARRAYLIST",(Serializable)allNotice);
+//                feedIntent.putExtra("BUNDLE",args);
+//                startActivity(feedIntent);
+            }
+        } );
     }
     private void getAlldataFromDB()
     {

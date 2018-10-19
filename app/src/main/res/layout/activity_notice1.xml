@@ -28,6 +28,12 @@
                 android:visibility="visible"
                 android:drawableLeft="@drawable/ic_action_notice"/>
 
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Notice Overview"
+                android:id="@+id/nov"/>
+
             <ListView
                 android:id="@+id/listnotice"
                 android:layout_width="match_parent"

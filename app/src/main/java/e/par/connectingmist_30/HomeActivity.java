@@ -34,15 +34,14 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.StringTokenizer;
 
-import e.par.connectingmist_30.Newsfeed_Notice.Edit_NewsfeedActivity;
+import e.par.connectingmist_30.HomeCollection;
+import e.par.connectingmist_30.Calender_view.Notice_cal;
 import e.par.connectingmist_30.Newsfeed_Notice.NewsActivity;
-import e.par.connectingmist_30.Newsfeed_Notice.NewsfeedActivity;
 import e.par.connectingmist_30.Newsfeed_Notice.NoticeActivity;
 
 public class HomeActivity extends AppCompatActivity {
-    private CardView newsfeed,location,notice,club,logout;
+    private CardView newsfeed,location,notice,club,logout,nov;
     private ImageView iAdmin;
     private SharedPreferences mPreferences;
     private DatabaseReference refDatabase;
@@ -54,6 +53,7 @@ public class HomeActivity extends AppCompatActivity {
     Button bt11;
     Button bt12;
     Handler handler;
+
 
     private ArrayList<NoticeInfo> allNotice;
 
@@ -74,6 +74,7 @@ public class HomeActivity extends AppCompatActivity {
         club=findViewById(R.id.clubCard);
         //iAdmin=findViewById(R.id.iAdmin);
         logout=findViewById(R.id.logout);
+        nov=findViewById(R.id.nov);
 
         refDatabase= FirebaseDatabase.getInstance().getReference("Notice");
         allNotice = new ArrayList<>();
@@ -124,11 +125,18 @@ public class HomeActivity extends AppCompatActivity {
 
 
 
+
         newsfeed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent feedIntent=new Intent(HomeActivity.this, NewsActivity.class);
                 startActivity(feedIntent);
+            }
+        });
+        nov.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
             }
         });
         location.setOnClickListener(new View.OnClickListener() {
