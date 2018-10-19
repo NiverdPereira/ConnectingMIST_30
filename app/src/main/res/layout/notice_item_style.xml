@@ -14,9 +14,15 @@
         android:layout_marginLeft="20dp" />
 
     <TextView
-        android:id="@+id/tDetail"
-        android:layout_width="340dp"
+        android:id="@+id/tHead"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:text="TextView" />
+
+    <TextView
+        android:id="@+id/tDetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp" />
+
 </LinearLayout>

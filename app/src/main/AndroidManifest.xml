@@ -33,16 +33,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!-- <service -->
-        <!--  -->
-        <!-- android:label="@string/app_name"> -->
-        <!-- <intent-filter> -->
-        <!-- <action android:name="your.app.domain.NotificationService" /> -->
+        <!--<service-->
+            <!---->
+            <!--android:label="@string/app_name">-->
+            <!--<intent-filter>-->
+                <!--<action android:name="your.app.domain.NotificationService" />-->
 
-
-        <!-- <category android:name="android.intent.category.DEFAULT" /> -->
-        <!-- </intent-filter> -->
-        <!-- </service> -->
+                <!--<category android:name="android.intent.category.DEFAULT" />-->
+            <!--</intent-filter>-->
+        <!--</service>-->
         <activity android:name=".HomeActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".Newsfeed_Notice.NoticeActivity" />
@@ -54,7 +53,6 @@
         <activity android:name=".Newsfeed_Notice.Edit_NewsfeedActivity" />
         <activity android:name=".Newsfeed_Notice.Edit_NoticeActivity" />
         <activity android:name=".MyprofileActivity" />
-        <activity android:name=".Calender_view.Notice_cal" />
 
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -76,8 +74,7 @@
         <activity android:name=".AboutActivity" />
         <activity android:name=".AtaglanceActivity" />
         <activity android:name=".LocationActivity" />
-        <activity android:name=".HistoryActivity" />
-        <activity android:name=".Calender_view.Notice_cal"></activity>
+        <activity android:name=".HistoryActivity"></activity>
     </application>
 
 </manifest>

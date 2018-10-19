@@ -156,7 +156,7 @@ public class NoticeActivity extends AppCompatActivity {
                                             int position, long id) {
                         String msg= "";
                         String head = "";
-                        head= head+allNotice.get( position ).getDate().trim();
+                        head= head+allNotice.get( position ).getHeadline().trim();
                         msg=msg+allNotice.get( position ).getDetails();
                         openDialog(head,msg);
                     }

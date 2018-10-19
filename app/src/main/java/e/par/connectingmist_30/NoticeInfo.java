@@ -1,11 +1,12 @@
 package e.par.connectingmist_30;
 
 public class NoticeInfo {
-    String details,date;
+    String details,date,headline;
 
-    public NoticeInfo(String notice, String date) {
+    public NoticeInfo(String notice, String date,String headline) {
         this.details = notice;
         this.date = date;
+        this.headline=headline;
     }
 
     public NoticeInfo() {
@@ -21,6 +22,14 @@ public class NoticeInfo {
 
     public String getDate() {
         return date;
+    }
+
+    public String getHeadline() {
+        return headline;
+    }
+
+    public void setHeadline(String headline) {
+        this.headline = headline;
     }
 
     public void setDate(String date) {
