@@ -43,7 +43,6 @@ public class NoticeAdapter extends BaseAdapter {
             viewHolder.details=view.findViewById(R.id.tDetail);
             viewHolder.date=view.findViewById(R.id.tDate);
             viewHolder.headline=view.findViewById(R.id.tHead);
-
             view.setTag(viewHolder);
         }
         else{

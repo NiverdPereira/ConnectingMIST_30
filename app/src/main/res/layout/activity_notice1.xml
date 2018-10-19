@@ -27,7 +27,15 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Headline"
                 android:visibility="visible"
                 android:drawableLeft="@drawable/ic_action_notice"/>
-
+            <EditText
+                android:id="@+id/editText1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:hint="Search here"
+                android:layout_marginLeft="28dp"
+                android:ems="10" />
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

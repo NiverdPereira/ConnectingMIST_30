@@ -2,27 +2,35 @@ package e.par.connectingmist_30.Newsfeed_Notice;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 //import android.support.design.widget.FloatingActionButton;
 //import android.support.design.widget.Snackbar;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -52,7 +60,7 @@ public class NoticeActivity extends AppCompatActivity {
     private ArrayList<NoticeInfo> allNotice;
     private DatabaseReference refDatabase;
 
-
+    EditText editsearch;
     private SharedPreferences mPreferences;
 
     private DrawerLayout dl;
@@ -61,6 +69,7 @@ public class NoticeActivity extends AppCompatActivity {
     private android.widget.Toolbar mt;
     Button nov;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,16 +77,26 @@ public class NoticeActivity extends AppCompatActivity {
         noticeListView = findViewById(R.id.listnotice);
         allNotice = new ArrayList<>();
         nov = findViewById( R.id.nov );
+        editsearch = findViewById( R.id.editText1 );
         refDatabase= FirebaseDatabase.getInstance().getReference("Notice");
         getAlldataFromDB();
-
         dl = (DrawerLayout)findViewById(R.id.activity_main);
         t = new ActionBarDrawerToggle(this,dl,0,0);
-
         dl.addDrawerListener(t);
         t.syncState();
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+        editsearch.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+
+            public void onFocusChange(View v, boolean hasFocus) {
+
+                if(hasFocus){
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(editsearch.getWindowToken(), 0);
+                }
+            }
+        });
 
         nv = (NavigationView)findViewById(R.id.nv);
         nv.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -113,21 +132,59 @@ public class NoticeActivity extends AppCompatActivity {
             }
         });
 
+        editsearch.addTextChangedListener(new TextWatcher() { //edit search
+            //Event when changed word on EditTex
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                ArrayList<NoticeInfo> temp = new ArrayList<NoticeInfo>();
+                int textlength = editsearch.getText().length();
+
+                temp.clear();
+                for (int i = 0; i < allNotice.size(); i++)
+                {
+                    int pp=0;
+                    pp=allNotice.get(i).getDetails().length();
+                    if (textlength <= pp)
+                    {
+                        if(editsearch.getText().toString().equalsIgnoreCase(
+                                (String)
+                                        allNotice.get(i).getDetails().subSequence(0,
+                                                textlength)))
+                        {
+                            temp.add(allNotice.get(i));
+                        }
+                    }
+                }
+                NoticeAdapter noticeAdapter = new NoticeAdapter(NoticeActivity.this, temp);
+                noticeListView.setAdapter(noticeAdapter);
+                //noticeListView.setAdapter(new CustomeArrayAdapter(MainActivity.this, temp));
+            }
+
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count,
+                                          int after) {
+                // TODO Auto-generated method stub
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                // TODO Auto-generated method stub
+
+            }
+        });
+
+
 
         nov.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent feedIntent=new Intent(NoticeActivity.this, Notice_cal.class);
-
-
                // feedIntent.putParcelableArrayListExtra("mylist", allNotice);
-
-
                // feedIntent.putParcelableArrayListExtra( "mylist", allNotice );
                // startActivity(feedIntent);
-
                // startActivity(intent);
-
 //                ArrayList<Object> object = new ArrayList<Object>();
 //                Intent feedIntent=new Intent(NoticeActivity.this, Notice_cal.class);
 //                Bundle args = new Bundle();
@@ -137,6 +194,9 @@ public class NoticeActivity extends AppCompatActivity {
             }
         } );
     }
+
+
+
     private void getAlldataFromDB()
     {
         refDatabase.addValueEventListener(new ValueEventListener() {
