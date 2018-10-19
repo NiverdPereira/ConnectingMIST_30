@@ -74,7 +74,8 @@
         <activity android:name=".AboutActivity" />
         <activity android:name=".AtaglanceActivity" />
         <activity android:name=".LocationActivity" />
-        <activity android:name=".HistoryActivity"></activity>
+        <activity android:name=".HistoryActivity" />
+        <activity android:name=".UpdateActivity"></activity>
     </application>
 
 </manifest>

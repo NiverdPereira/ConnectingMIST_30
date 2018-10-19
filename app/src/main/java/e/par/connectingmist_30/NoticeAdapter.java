@@ -42,6 +42,7 @@ public class NoticeAdapter extends BaseAdapter {
             view=layoutInflater.inflate(R.layout.notice_item_style,null);
             viewHolder.details=view.findViewById(R.id.tDetail);
             viewHolder.date=view.findViewById(R.id.tDate);
+            viewHolder.headline=view.findViewById(R.id.tHead);
 
             view.setTag(viewHolder);
         }
@@ -55,7 +56,7 @@ public class NoticeAdapter extends BaseAdapter {
         return view;
     }
     private static class ViewHolder{
-        TextView date,details;
+        TextView date,details,headline;
     }
     private ViewHolder viewHolder = null;
 }

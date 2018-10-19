@@ -1,8 +1,11 @@
 package e.par.connectingmist_30;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.util.Log;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -23,6 +26,7 @@ public class MyprofileActivity extends AppCompatActivity {
     //private DatabaseReference refDatabase;
     FirebaseUser user;
     TextView name,id,dept,sess,email;
+    private CardView updateC;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,9 +37,17 @@ public class MyprofileActivity extends AppCompatActivity {
         dept=findViewById(R.id.tvdept);
         sess=findViewById(R.id.tvsession);
         email=findViewById(R.id.tvemail);
+        updateC=findViewById(R.id.cUpdate);
 
         user=FirebaseAuth.getInstance().getCurrentUser();
         String userid=user.getUid();
+        updateC.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent updateIntent=new Intent(MyprofileActivity.this,UpdateActivity.class);
+                startActivity(updateIntent);
+            }
+        });
 
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users");
         ref.child(userid).addListenerForSingleValueEvent(new ValueEventListener() {
