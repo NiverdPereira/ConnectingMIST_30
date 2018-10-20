@@ -29,6 +29,7 @@ public class Notice_cal extends AppCompatActivity {
     public GregorianCalendar cal_month, cal_month_copy;
     private HwAdapter hwAdapter;
     private TextView tv_month;
+    ArrayList<String> d,h,de;
 
     private DatabaseReference refDatabase;
     private ArrayList<NoticeInfo> allNotice;
@@ -38,11 +39,14 @@ public class Notice_cal extends AppCompatActivity {
         setContentView(R.layout.activity_notice_cal);
 
         refDatabase= FirebaseDatabase.getInstance().getReference("Notice");
+        d = new ArrayList<>(  );
+        h = new ArrayList<>(  );
+        de = new ArrayList<>(  );
 
-       // allNotice = getIntent().getParcelableExtra("mylist");
-        Intent intent = getIntent();
-        Bundle args = intent.getBundleExtra("BUNDLE");
-        allNotice = (ArrayList<NoticeInfo>) args.getSerializable("ARRAYLIST");
+      d= getIntent().getStringArrayListExtra( "date" );
+      h= getIntent().getStringArrayListExtra( "head" );
+      de= getIntent().getStringArrayListExtra( "detail" );
+
 
 
 
@@ -54,12 +58,12 @@ public class Notice_cal extends AppCompatActivity {
 
         HomeCollection.date_collection_arr=new ArrayList<HomeCollection>();
 
-        for(int i=0;i<allNotice.size();i++)
+        for(int i=0;i<d.size();i++)
         {
-           //String head= allNotice.get( i ).gethead;
-           String date= allNotice.get( i ).getDate();
-            String detail= allNotice.get( i ).getDetails();
-            HomeCollection.date_collection_arr.add( new HomeCollection("2018-10-08" ,detail,"Holiday"));
+           String head= h.get( i );
+           String date= d.get( i );
+            String detail= de.get( i );
+            HomeCollection.date_collection_arr.add( new HomeCollection("2018-10-08" ,head,detail));
            // HomeCollection.date_collection_arr.add( new HomeCollection("2017-07-08" ,"Diwali","Holiday"));
            // HomeCollection.date_collection_arr.add( new HomeCollection("2017-07-08" ,"Diwali","Holiday"));
           //  HomeCollection.date_collection_arr.add( new HomeCollection("2017-07-08" ,"Diwali","Holiday"));

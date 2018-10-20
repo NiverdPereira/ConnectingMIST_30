@@ -58,6 +58,8 @@ import e.par.connectingmist_30.R;
 public class NoticeActivity extends AppCompatActivity {
     private ListView noticeListView;
     private ArrayList<NoticeInfo> allNotice;
+    ArrayList<String > d,h,de;
+
     private DatabaseReference refDatabase;
 
     EditText editsearch;
@@ -76,6 +78,10 @@ public class NoticeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_notice1);
         noticeListView = findViewById(R.id.listnotice);
         allNotice = new ArrayList<>();
+        d = new ArrayList<>();
+        h = new ArrayList<>();
+        de = new ArrayList<>();
+
         nov = findViewById( R.id.nov );
         editsearch = findViewById( R.id.editText1 );
         refDatabase= FirebaseDatabase.getInstance().getReference("Notice");
@@ -181,16 +187,10 @@ public class NoticeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent feedIntent=new Intent(NoticeActivity.this, Notice_cal.class);
-               // feedIntent.putParcelableArrayListExtra("mylist", allNotice);
-               // feedIntent.putParcelableArrayListExtra( "mylist", allNotice );
-               // startActivity(feedIntent);
-               // startActivity(intent);
-//                ArrayList<Object> object = new ArrayList<Object>();
-//                Intent feedIntent=new Intent(NoticeActivity.this, Notice_cal.class);
-//                Bundle args = new Bundle();
-//                args.putSerializable("ARRAYLIST",(Serializable)allNotice);
-//                feedIntent.putExtra("BUNDLE",args);
-//                startActivity(feedIntent);
+                feedIntent.putStringArrayListExtra( "date",d );
+                feedIntent.putStringArrayListExtra( "head",h );
+                feedIntent.putStringArrayListExtra( "detail",de );
+                startActivity( feedIntent );
             }
         } );
     }
@@ -202,9 +202,15 @@ public class NoticeActivity extends AppCompatActivity {
         refDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                int i=0;
                 for(DataSnapshot data: dataSnapshot.getChildren()){
                     NoticeInfo value= data.getValue(NoticeInfo.class);
                     allNotice.add(value);
+                    d.add( value.getDate() );
+                    h.add( value.getHeadline() );
+                    de.add( value.getDetails() );
+
+                    i++;
                 }
                 NoticeAdapter noticeAdapter = new NoticeAdapter(NoticeActivity.this, allNotice);
                 noticeListView.setAdapter(noticeAdapter);

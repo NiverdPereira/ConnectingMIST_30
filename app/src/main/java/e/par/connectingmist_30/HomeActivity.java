@@ -56,6 +56,7 @@ public class HomeActivity extends AppCompatActivity {
 
 
     private ArrayList<NoticeInfo> allNotice;
+    private ArrayList<Integer> mark;
 
     int tt;
     int[] p = new int[1];
@@ -78,6 +79,7 @@ public class HomeActivity extends AppCompatActivity {
 
         refDatabase= FirebaseDatabase.getInstance().getReference("Notice");
         allNotice = new ArrayList<>();
+        mark = new ArrayList<>();
 
         mPreferences = getSharedPreferences( "Session", MODE_PRIVATE );
        // SharedPreferences.Editor editor = mPreferences.edit();
@@ -241,16 +243,21 @@ public class HomeActivity extends AppCompatActivity {
             temp = allNotice.get( i ).getDate();
             try {
                 d = sdf.parse( temp );
-                if(d.compareTo(prevdate) > 0)
+                //if(d.compareTo(prevdate) > 0 && mark.get( i )!=1 )
+                if(mark.get(i).equals( 0 ))
                 {
                     f++;
                    // startService(new Intent(getApplicationContext(), NotificationService.class));
-                    sendNotification(f);
+                    sendNotification(f, allNotice.get( i ).headline.trim());
                     SharedPreferences.Editor editor = mPreferences.edit();
                     editor.putString( "date", nowAsString );
-                    editor.putInt( "flag", f );
+
+
+                    //mark.add( i,1 );
+                    mark.set( i,1 );
+                    editor.putInt( "flag", mark.get( i ) );
                     editor.commit();
-                    break;
+                    //break;
                 }
                 else
                 {
@@ -264,7 +271,7 @@ public class HomeActivity extends AppCompatActivity {
         }
     }
 
-    public void sendNotification(int tt) {
+    public void sendNotification(int tt,String s) {
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(this);
         //Create the intent that’ll fire when the user taps the notification//
@@ -273,7 +280,7 @@ public class HomeActivity extends AppCompatActivity {
         mBuilder.setContentIntent(pendingIntent);
         mBuilder.setSmallIcon(R.drawable.ic_launcher_background);
         mBuilder.setContentTitle("New Notice Added");
-        mBuilder.setContentText(tt+" Tap to See Notice");
+        mBuilder.setContentText("Tap to see "+tt+" new notice");
         NotificationManager mNotificationManager =
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         mNotificationManager.notify(001, mBuilder.build());
@@ -295,7 +302,20 @@ public class HomeActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for(DataSnapshot data: dataSnapshot.getChildren()){
                     NoticeInfo value= data.getValue(NoticeInfo.class);
-                    allNotice.add(value);
+
+                    int flg=0;
+                    for(int i=0;i<allNotice.size();i++) {
+                        if(allNotice.get( i ).getHeadline().trim().equals( value.getHeadline().trim() ))
+                        {
+                            flg=1;break;
+                        }
+                    }
+
+                    if(flg==0)
+                    {
+                        allNotice.add( value );
+                        mark.add( 0 );
+                    }
                     p[0]++;
                 }
                 Toast.makeText(getApplicationContext(),"Invalid info",Toast.LENGTH_SHORT);
