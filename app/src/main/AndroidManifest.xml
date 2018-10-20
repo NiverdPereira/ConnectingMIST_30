@@ -53,6 +53,7 @@
         <activity android:name=".Newsfeed_Notice.Edit_NewsfeedActivity" />
         <activity android:name=".Newsfeed_Notice.Edit_NoticeActivity" />
         <activity android:name=".MyprofileActivity" />
+        <activity android:name=".UpdateActivity"/>
         <activity android:name=".Calender_view.Notice_cal" />
 
         <!--

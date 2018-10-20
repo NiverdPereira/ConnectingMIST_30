@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -69,31 +70,36 @@ public class UpdateActivity extends AppCompatActivity {
                 scMail=user1.getEmail();
 
                 scPass = ecPass.getText().toString().trim();
-                AuthCredential credential = EmailAuthProvider
-                        .getCredential(scMail,scPass);
-                user.reauthenticate(credential)
-                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                if (task.isSuccessful()) {
-                                    user.updatePassword(sPass).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<Void> task) {
-                                            if (task.isSuccessful()) {
-                                                Log.d(" ", "Password updated");
-                                            } else {
-                                                Log.d(" ", "Error password not updated");
+                if(scPass==null || sPass==null){
+                    Toast.makeText(UpdateActivity.this, "Please Enter Current Password", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    AuthCredential credential = EmailAuthProvider
+                            .getCredential(scMail, scPass);
+                    user.reauthenticate(credential)
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                        user.updatePassword(sPass).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                if (task.isSuccessful()) {
+                                                    Log.d(" ", "Password updated");
+                                                } else {
+                                                    Log.d(" ", "Error password not updated");
+                                                }
                                             }
-                                        }
-                                    });
-                                } else {
-                                    Log.d(" ", "Error auth failed");
+                                        });
+                                    } else {
+                                        Log.d(" ", "Error auth failed");
+                                    }
                                 }
-                            }
-                        });
+                            });
+                }
 
-                ref.child(uid).child("name").setValue(sName);
-                ref.child(uid).child("email").setValue(sMail);
+                if(sName!=" ")ref.child(uid).child("name").setValue(sName);
+                if(sMail!="")ref.child(uid).child("email").setValue(sMail);
                 Intent goBack=new Intent(UpdateActivity.this,MyprofileActivity.class);
                 startActivity(goBack);
 
