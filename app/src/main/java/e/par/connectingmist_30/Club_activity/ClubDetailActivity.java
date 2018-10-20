@@ -59,6 +59,7 @@ public class ClubDetailActivity extends AppCompatActivity {
 
 
         toolbar =  findViewById(R.id.toolbar);
+
         ov= findViewById( R.id.ov );
         floatingActionButton =  findViewById(R.id.floatingActionButton);
         Intent mIntent = getIntent();
@@ -151,6 +152,7 @@ public class ClubDetailActivity extends AppCompatActivity {
                 //{
 
                      Intent feedIntent=new Intent(ClubDetailActivity.this, Notice_cal.class);
+                     feedIntent.putExtra( "com",intValue );
                      feedIntent.putStringArrayListExtra( "date",d );
                      feedIntent.putStringArrayListExtra( "head",h );
                      feedIntent.putStringArrayListExtra( "detail",de );

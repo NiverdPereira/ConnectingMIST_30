@@ -187,6 +187,7 @@ public class NoticeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent feedIntent=new Intent(NoticeActivity.this, Notice_cal.class);
+                feedIntent.putExtra( "com",6 );
                 feedIntent.putStringArrayListExtra( "date",d );
                 feedIntent.putStringArrayListExtra( "head",h );
                 feedIntent.putStringArrayListExtra( "detail",de );

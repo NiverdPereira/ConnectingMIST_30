@@ -2,6 +2,8 @@ package e.par.connectingmist_30.Calender_view;
 
 
 import android.content.Intent;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,6 +14,7 @@ import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -36,9 +39,10 @@ public class Notice_cal extends AppCompatActivity {
     ArrayList<String> d,h,de;
 
     Button back;
-
+    Toolbar toolbar;
     private DatabaseReference refDatabase;
     private ArrayList<NoticeInfo> allNotice;
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,9 +53,37 @@ public class Notice_cal extends AppCompatActivity {
         h = new ArrayList<>(  );
         de = new ArrayList<>(  );
 
+        toolbar =  findViewById(R.id.toolbar);
+
       d= getIntent().getStringArrayListExtra( "date" );
       h= getIntent().getStringArrayListExtra( "head" );
       de= getIntent().getStringArrayListExtra( "detail" );
+
+      int com = getIntent().getIntExtra( "com",0 );
+      if(com==1)
+      {
+          toolbar.setTitle("MCC Event Overview");
+      }
+      else if(com==2)
+      {
+          toolbar.setTitle("MLC Event Overview");
+      }
+      else if(com==3)
+      {
+          toolbar.setTitle("MDFS Event Overview");
+      }
+      else if(com==4)
+      {
+          toolbar.setTitle("MRC Event Overview");
+      }
+      else if(com==5)
+      {
+          toolbar.setTitle("MPS Event Overview");
+      }
+      else if(com==6)
+      {
+          toolbar.setTitle("MIST Notice Overview");
+      }
 
 
 
