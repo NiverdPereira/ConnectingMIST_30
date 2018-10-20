@@ -58,6 +58,10 @@ public class EventsFragment extends Fragment {
         this.t = t;
     }
 
+    public void setAllevents(ArrayList<Events> allevents) {
+        this.allevents = allevents;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -66,7 +70,7 @@ public class EventsFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_mccevents, container, false);
         ListView li=(ListView)v.findViewById(R.id.listView1);
 
-        allevents = new ArrayList<>();
+
         if(t==1)
         {
 
@@ -88,11 +92,11 @@ public class EventsFragment extends Fragment {
         {
             refDatabase= FirebaseDatabase.getInstance().getReference("MPS_Events");
         }
-        getAlldataFromDB();
+       // getAlldataFromDB();
         Adapter adapter = new Adapter(getContext(),R.layout.mcceventadapter, allevents);
         li.setAdapter(adapter);
 
-        Toast.makeText(getContext(), "Done",Toast.LENGTH_SHORT).show();
+       // Toast.makeText(getContext(), "Done",Toast.LENGTH_SHORT).show();
 
         li.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {

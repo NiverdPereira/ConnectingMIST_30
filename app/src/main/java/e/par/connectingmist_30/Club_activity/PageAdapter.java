@@ -4,15 +4,21 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import java.util.ArrayList;
+
 public class PageAdapter extends FragmentPagerAdapter {
 
     private int numOfTabs;
     int st;
+    ArrayList<Events>temp;
+    ArrayList<Events> nn;
 
-    PageAdapter(FragmentManager fm, int numOfTabs, int st) {
+    PageAdapter(FragmentManager fm, int numOfTabs, int st, ArrayList<Events> temp, ArrayList<Events> nn) {
         super(fm);
         this.numOfTabs = numOfTabs;
         this.st=st;
+        this.temp= temp;
+        this.nn= nn;
     }
 
     @Override
@@ -21,10 +27,12 @@ public class PageAdapter extends FragmentPagerAdapter {
             case 0:
                 EventsFragment mf= new EventsFragment();
                 mf.setT( st );
+                mf.setAllevents( temp );
                 return mf;
             case 1:
                 NewsFragment nf= new NewsFragment();
                 nf.setT( st );
+                nf.setAllnews( nn );
                 return nf;
             case 2:
                 StatusFragment sf= new StatusFragment();

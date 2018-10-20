@@ -1,6 +1,8 @@
 package e.par.connectingmist_30.Club_activity;
 
-public class Events {
+import java.io.Serializable;
+
+public class Events implements Serializable {
     String headline,date,content;
 
     public Events() {

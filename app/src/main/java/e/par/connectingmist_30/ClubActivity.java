@@ -9,12 +9,22 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+
 import e.par.connectingmist_30.Club_activity.ClubDetailActivity;
+import e.par.connectingmist_30.Club_activity.Events;
 
 public class ClubActivity extends AppCompatActivity {
 
@@ -26,6 +36,18 @@ public class ClubActivity extends AppCompatActivity {
     private ActionBarDrawerToggle t;
     private NavigationView nv;
     private Toolbar mt;
+    private ArrayList<Events> alleventsmcc;
+    private ArrayList<Events> alleventsmlc;
+    private ArrayList<Events> alleventsmdfs;
+    private ArrayList<Events> alleventsmrc;
+    private ArrayList<Events> alleventsmps;
+
+    private ArrayList<Events> allnewsmcc;
+    private ArrayList<Events> allnewsmlc;
+    private ArrayList<Events> allnewsmdfs;
+    private ArrayList<Events> allnewsmrc;
+    private ArrayList<Events> allnewsmps;
+    DatabaseReference refDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,12 +65,56 @@ public class ClubActivity extends AppCompatActivity {
                 startActivity( mccIntent );
             }
         });*/
+
+        alleventsmcc=new ArrayList<>(  );
+        alleventsmlc=new ArrayList<>(  );
+        alleventsmdfs=new ArrayList<>(  );
+        alleventsmrc=new ArrayList<>(  );
+        alleventsmps=new ArrayList<>(  );
+
+        allnewsmcc=new ArrayList<>(  );
+        allnewsmlc=new ArrayList<>(  );
+        allnewsmdfs=new ArrayList<>(  );
+        allnewsmrc=new ArrayList<>(  );
+        allnewsmps=new ArrayList<>(  );
+
+//        alleventsmps.clear();
+//        alleventsmrc.clear();
+//        alleventsmdfs.clear();
+//        alleventsmcc.clear();
+//        //alleventsmlc.clear();
+        refDatabase= FirebaseDatabase.getInstance().getReference("MCC_Events");
+        getAlldataFromDBmcc();
+        refDatabase= FirebaseDatabase.getInstance().getReference("MLC_Events");
+        getAlldataFromDBmlc();
+        refDatabase= FirebaseDatabase.getInstance().getReference("MDFS_Events");
+        getAlldataFromDBmdfs();
+        refDatabase= FirebaseDatabase.getInstance().getReference("MRC_Events");
+        getAlldataFromDBmrc();
+        refDatabase= FirebaseDatabase.getInstance().getReference("MPS_Events");
+        getAlldataFromDBmps();
+
+        refDatabase= FirebaseDatabase.getInstance().getReference("MCC_News");
+        ngetAlldataFromDBmcc();
+        refDatabase= FirebaseDatabase.getInstance().getReference("MLC_News");
+        ngetAlldataFromDBmlc();
+        refDatabase= FirebaseDatabase.getInstance().getReference("MDFS_NEWS");
+        ngetAlldataFromDBmdfs();
+        refDatabase= FirebaseDatabase.getInstance().getReference("MRC_NEWS");
+        ngetAlldataFromDBmrc();
+        refDatabase= FirebaseDatabase.getInstance().getReference("MPS_NEWS");
+        ngetAlldataFromDBmps();
+
         mccCV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent mcIntent=new Intent(ClubActivity.this, ClubDetailActivity.class);
                 int intValue =1;
                 mcIntent.putExtra("VariableName", intValue);
+                Bundle bundle = new Bundle(  );
+                bundle.putSerializable( "events",alleventsmcc );
+                bundle.putSerializable( "news",allnewsmcc );
+                mcIntent.putExtras( bundle );
                 startActivity(mcIntent);
             }
         });
@@ -59,6 +125,10 @@ public class ClubActivity extends AppCompatActivity {
                 Intent mlcIntent=new Intent(ClubActivity.this, ClubDetailActivity.class);
                 int intValue =2;
                 mlcIntent.putExtra("VariableName", intValue);
+                Bundle bundle = new Bundle(  );
+                bundle.putSerializable( "events",alleventsmlc );
+                bundle.putSerializable( "news", alleventsmlc);
+                mlcIntent.putExtras( bundle );
                 startActivity(mlcIntent);
             }
         } );
@@ -69,6 +139,11 @@ public class ClubActivity extends AppCompatActivity {
                 Intent mdfsIntent=new Intent(ClubActivity.this, ClubDetailActivity.class);
                 int intValue =3;
                 mdfsIntent.putExtra("VariableName", intValue);
+
+                Bundle bundle = new Bundle(  );
+                bundle.putSerializable( "events",alleventsmdfs );
+                bundle.putSerializable( "news", alleventsmdfs);
+                mdfsIntent.putExtras( bundle );
                 startActivity(mdfsIntent);
             }
         });
@@ -79,6 +154,10 @@ public class ClubActivity extends AppCompatActivity {
                 Intent mrcIntent=new Intent(ClubActivity.this, ClubDetailActivity.class);
                 int intValue =4;
                 mrcIntent.putExtra("VariableName", intValue);
+                Bundle bundle = new Bundle(  );
+                bundle.putSerializable( "events",alleventsmrc );
+                bundle.putSerializable( "news", alleventsmrc);
+                mrcIntent.putExtras( bundle );
                 startActivity(mrcIntent);
             }
         });
@@ -88,6 +167,10 @@ public class ClubActivity extends AppCompatActivity {
                 Intent mpsIntent=new Intent(ClubActivity.this, ClubDetailActivity.class);
                 int intValue =5;
                 mpsIntent.putExtra("VariableName", intValue);
+                Bundle bundle = new Bundle(  );
+                bundle.putSerializable( "events",alleventsmps );
+                bundle.putSerializable( "news", alleventsmps);
+                mpsIntent.putExtras( bundle );
                 startActivity(mpsIntent);
             }
         });
@@ -141,4 +224,179 @@ public class ClubActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+
+    private void getAlldataFromDBmcc()
+    {
+        refDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot data: dataSnapshot.getChildren()){
+                    Events value= data.getValue(Events.class);
+                    alleventsmcc.add(value);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.w("TAG", "Failed to read value.", databaseError.toException());
+            }
+        });
+    }
+    private void getAlldataFromDBmlc()
+    {
+        refDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot data: dataSnapshot.getChildren()){
+                    Events value= data.getValue(Events.class);
+                    alleventsmlc.add(value);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.w("TAG", "Failed to read value.", databaseError.toException());
+            }
+        });
+    }
+    private void getAlldataFromDBmdfs()
+    {
+        refDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot data: dataSnapshot.getChildren()){
+                    Events value= data.getValue(Events.class);
+                    alleventsmdfs.add(value);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.w("TAG", "Failed to read value.", databaseError.toException());
+            }
+        });
+    }
+    private void getAlldataFromDBmrc()
+    {
+        refDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot data: dataSnapshot.getChildren()){
+                    Events value= data.getValue(Events.class);
+                    alleventsmrc.add(value);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.w("TAG", "Failed to read value.", databaseError.toException());
+            }
+        });
+    }
+    private void getAlldataFromDBmps()
+    {
+        refDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot data: dataSnapshot.getChildren()){
+                    Events value= data.getValue(Events.class);
+                    alleventsmps.add(value);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.w("TAG", "Failed to read value.", databaseError.toException());
+            }
+        });
+    }
+
+
+    private void ngetAlldataFromDBmcc()
+    {
+        refDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot data: dataSnapshot.getChildren()){
+                    Events value= data.getValue(Events.class);
+                    allnewsmcc.add(value);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.w("TAG", "Failed to read value.", databaseError.toException());
+            }
+        });
+    }
+    private void ngetAlldataFromDBmlc()
+    {
+        refDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot data: dataSnapshot.getChildren()){
+                    Events value= data.getValue(Events.class);
+                    allnewsmlc.add(value);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.w("TAG", "Failed to read value.", databaseError.toException());
+            }
+        });
+    }
+    private void ngetAlldataFromDBmdfs()
+    {
+        refDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot data: dataSnapshot.getChildren()){
+                    Events value= data.getValue(Events.class);
+                    allnewsmdfs.add(value);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.w("TAG", "Failed to read value.", databaseError.toException());
+            }
+        });
+    }
+    private void ngetAlldataFromDBmrc()
+    {
+        refDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot data: dataSnapshot.getChildren()){
+                    Events value= data.getValue(Events.class);
+                    allnewsmrc.add(value);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.w("TAG", "Failed to read value.", databaseError.toException());
+            }
+        });
+    }
+    private void ngetAlldataFromDBmps()
+    {
+        refDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot data: dataSnapshot.getChildren()){
+                    Events value= data.getValue(Events.class);
+                    allnewsmps.add(value);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.w("TAG", "Failed to read value.", databaseError.toException());
+            }
+        });
+    }
+
 }

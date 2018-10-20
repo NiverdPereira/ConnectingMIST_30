@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -18,7 +19,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.GregorianCalendar;
 
 import e.par.connectingmist_30.Calender_view.HomeCollection;
@@ -30,6 +34,8 @@ public class Notice_cal extends AppCompatActivity {
     private HwAdapter hwAdapter;
     private TextView tv_month;
     ArrayList<String> d,h,de;
+
+    Button back;
 
     private DatabaseReference refDatabase;
     private ArrayList<NoticeInfo> allNotice;
@@ -52,6 +58,7 @@ public class Notice_cal extends AppCompatActivity {
 
 
 
+
        // HomeCollection.date_collection_arr = (ArrayList<HomeCollection >) getIntent().getSerializableExtra("mylist");
        // HomeCollection.date_collection_arr = getIntent().getParcelableExtra("mylist");
 
@@ -63,7 +70,17 @@ public class Notice_cal extends AppCompatActivity {
            String head= h.get( i );
            String date= d.get( i );
             String detail= de.get( i );
-            HomeCollection.date_collection_arr.add( new HomeCollection("2018-10-08" ,head,detail));
+            SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yy");
+            SimpleDateFormat sdf2 = new SimpleDateFormat("yy-MM-dd");
+            Date dd= new Date(  );
+            try {
+                 dd = sdf.parse( date );
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            String nowAsString = sdf2.format(dd);
+            nowAsString="20"+nowAsString;
+            HomeCollection.date_collection_arr.add( new HomeCollection(nowAsString ,head,detail));
            // HomeCollection.date_collection_arr.add( new HomeCollection("2017-07-08" ,"Diwali","Holiday"));
            // HomeCollection.date_collection_arr.add( new HomeCollection("2017-07-08" ,"Diwali","Holiday"));
           //  HomeCollection.date_collection_arr.add( new HomeCollection("2017-07-08" ,"Diwali","Holiday"));

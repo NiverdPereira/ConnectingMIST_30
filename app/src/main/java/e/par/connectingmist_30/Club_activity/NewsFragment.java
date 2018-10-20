@@ -56,6 +56,9 @@ public class NewsFragment extends Fragment {
         this.t = t;
     }
 
+    public void setAllnews(ArrayList<Events> allnews) {
+        this.allnews = allnews;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -63,7 +66,7 @@ public class NewsFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_mccnews, container, false);
         ListView li=(ListView)v.findViewById(R.id.listView1);
 
-        allnews = new ArrayList<>();
+       // allnews = new ArrayList<>();
         if(t==1)
         {
 
@@ -85,11 +88,11 @@ public class NewsFragment extends Fragment {
         {
             refDatabase= FirebaseDatabase.getInstance().getReference("MPS_NEWS");
         }
-        getAlldataFromDB();
+       // getAlldataFromDB();
         NewsFragment.Adapter adapter = new NewsFragment.Adapter(getContext(),R.layout.mcceventadapter, allnews);
         li.setAdapter(adapter);
 
-        Toast.makeText(getContext(), "Done",Toast.LENGTH_SHORT).show();
+      //  Toast.makeText(getContext(), "Done",Toast.LENGTH_SHORT).show();
 
         li.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {

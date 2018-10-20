@@ -1,6 +1,8 @@
 package e.par.connectingmist_30.Club_activity;
 
-public class News {
+import java.io.Serializable;
+
+public class News implements Serializable {
     String headline,date,content;
 
     public News() {
