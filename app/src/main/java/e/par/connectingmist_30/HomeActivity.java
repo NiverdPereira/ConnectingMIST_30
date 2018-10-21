@@ -147,6 +147,7 @@ public class HomeActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             Toast.makeText(HomeActivity.this,"Email sent",Toast.LENGTH_SHORT).show();
+                            tVerify.setText("Welcome");
                         }
                     });
                 }
