@@ -19,9 +19,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -43,8 +46,11 @@ import e.par.connectingmist_30.Newsfeed_Notice.NoticeActivity;
 public class HomeActivity extends AppCompatActivity {
     private CardView newsfeed,location,notice,club,logout,nov;
     private ImageView iAdmin;
+    private TextView tVerify;
     private SharedPreferences mPreferences;
     private DatabaseReference refDatabase;
+    private FirebaseAuth mAuth;
+    private FirebaseUser user;
 
     private DrawerLayout dl;
     private ActionBarDrawerToggle t;
@@ -73,6 +79,7 @@ public class HomeActivity extends AppCompatActivity {
         location=findViewById(R.id.locCard);
         notice=findViewById(R.id.noticeCard);
         club=findViewById(R.id.clubCard);
+        tVerify=findViewById(R.id.tVerify);
         //iAdmin=findViewById(R.id.iAdmin);
         logout=findViewById(R.id.logout);
         nov=findViewById(R.id.nov);
@@ -126,13 +133,34 @@ public class HomeActivity extends AppCompatActivity {
         }, delay);
 
 
+        user=FirebaseAuth.getInstance().getCurrentUser();
+        if(user.isEmailVerified()){
+            tVerify.setText("Welcome");
 
+        }
+        else{
+            tVerify.setText("Please Verify. Click Here");
+            tVerify.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    user.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            Toast.makeText(HomeActivity.this,"Email sent",Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+            });
+        }
 
         newsfeed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent feedIntent=new Intent(HomeActivity.this, NewsActivity.class);
-                startActivity(feedIntent);
+                if(!user.isEmailVerified()) Toast.makeText(HomeActivity.this,"Please verify Email",Toast.LENGTH_LONG).show();
+                else {
+                    Intent feedIntent = new Intent(HomeActivity.this, NewsActivity.class);
+                    startActivity(feedIntent);
+                }
             }
         });
         nov.setOnClickListener(new View.OnClickListener() {
@@ -144,22 +172,31 @@ public class HomeActivity extends AppCompatActivity {
         location.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent locIntent=new Intent(HomeActivity.this,SearchActivity.class);
-                startActivity(locIntent);
+                if(!user.isEmailVerified()) Toast.makeText(HomeActivity.this,"Please verify Email",Toast.LENGTH_LONG).show();
+                else {
+                    Intent locIntent = new Intent(HomeActivity.this, SearchActivity.class);
+                    startActivity(locIntent);
+                }
             }
         });
         notice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent noticeIntent=new Intent(HomeActivity.this, NoticeActivity.class);
-                startActivity(noticeIntent);
+                if(!user.isEmailVerified()) Toast.makeText(HomeActivity.this,"Please verify Email",Toast.LENGTH_LONG).show();
+                else {
+                    Intent noticeIntent = new Intent(HomeActivity.this, NoticeActivity.class);
+                    startActivity(noticeIntent);
+                }
             }
         });
         club.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent clubIntent= new Intent(HomeActivity.this, ClubActivity.class);
-                startActivity(clubIntent);
+                if(!user.isEmailVerified()) Toast.makeText(HomeActivity.this,"Please verify Email",Toast.LENGTH_LONG).show();
+                else {
+                    Intent clubIntent = new Intent(HomeActivity.this, ClubActivity.class);
+                    startActivity(clubIntent);
+                }
             }
         });
         /*iAdmin.setOnClickListener(new View.OnClickListener() {

@@ -55,6 +55,7 @@
         <activity android:name=".MyprofileActivity" />
         <activity android:name=".UpdateActivity"/>
         <activity android:name=".Calender_view.Notice_cal" />
+        <activity android:name=".ProviderPicUpload"/>
 
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.

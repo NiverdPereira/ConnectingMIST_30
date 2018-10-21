@@ -98,8 +98,8 @@ public class UpdateActivity extends AppCompatActivity {
                             });
                 }
 
-                if(sName!=" ")ref.child(uid).child("name").setValue(sName);
-                if(sMail!="")ref.child(uid).child("email").setValue(sMail);
+                if(sName.length()>0)ref.child(uid).child("name").setValue(sName);
+                if(sMail.length()>0)ref.child(uid).child("email").setValue(sMail);
                 Intent goBack=new Intent(UpdateActivity.this,MyprofileActivity.class);
                 startActivity(goBack);
 
