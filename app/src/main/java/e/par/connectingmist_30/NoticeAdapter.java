@@ -51,6 +51,7 @@ public class NoticeAdapter extends BaseAdapter {
         }
         viewHolder.details.setText(allNotice.get(pos).getDetails());
         viewHolder.date.setText(allNotice.get(pos).getDate());
+        viewHolder.headline.setText(allNotice.get(pos).getHeadline());
 
         return view;
     }

@@ -23,7 +23,7 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
     CardView bSearch,bMap;
     TextView bShow;
     Spinner spinner;
-    String sShow;
+    String sShow,mView=null;
 
     private SharedPreferences mPreferences;
 
@@ -50,6 +50,7 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
             @Override
             public void onClick(View v) {
                 Intent mapIntent=new Intent(SearchActivity.this,MapsActivity.class);
+                mapIntent.putExtra("Locate",mView);
                 startActivity(mapIntent);
             }
         });
@@ -102,14 +103,38 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
         bSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(sShow.equals("Network Lab")) bShow.setText("Tower 1 6th floor");
-                else if(sShow.equals("Artificial Intelligence Lab")) bShow.setText("Tower 1 4th floor");
-                else if(sShow.equals("Commandants Office")) bShow.setText("Admin Building");
-                else if(sShow.equals("CSE Department")) bShow.setText("Tower 1 8th floor");
-                else if(sShow.equals("CSE 1st Year")) bShow.setText("Tower 2 3rd floor");
-                else if(sShow.equals("CSE 2nd Year")) bShow.setText("Tower 1 6th floor");
-                else if(sShow.equals("CSE 3rd Year")) bShow.setText("Tower 2 5th floor");
-                else if(sShow.equals("Tailor Shop")) bShow.setText("MIST Cafeteria 2nd floor");
+                if(sShow.equals("Network Lab")) {
+                    bShow.setText("Tower 1 6th floor");
+                    mView="tower1";
+                }
+                else if(sShow.equals("Artificial Intelligence Lab")) {
+                    bShow.setText("Tower 1 4th floor");
+                    mView="tower1";
+                }
+                else if(sShow.equals("Commandants Office")) {
+                    bShow.setText("Admin Building");
+                    mView="admin";
+                }
+                else if(sShow.equals("CSE Department")) {
+                    bShow.setText("Tower 1 8th floor");
+                    mView="tower1";
+                }
+                else if(sShow.equals("CSE 1st Year")) {
+                    bShow.setText("Tower 2 3rd floor");
+                    mView="tower2";
+                }
+                else if(sShow.equals("CSE 2nd Year")) {
+                    bShow.setText("Tower 1 6th floor");
+                    mView="tower1";
+                }
+                else if(sShow.equals("CSE 3rd Year")) {
+                    bShow.setText("Tower 2 5th floor");
+                    mView="tower2";
+                }
+                else if(sShow.equals("Tailor Shop")) {
+                    bShow.setText("MIST Cafeteria 2nd floor");
+                    mView="cafe";
+                }
             }
         });
     }

@@ -34,6 +34,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -223,7 +224,7 @@ public class NoticeActivity extends AppCompatActivity {
                                             int position, long id) {
                         String msg= "";
                         String head = "";
-                        head= head+allNotice.get( position ).getHeadline().trim();
+                        head= head+allNotice.get( position ).getHeadline();
                         msg=msg+allNotice.get( position ).getDetails();
                         openDialog(head,msg);
                     }

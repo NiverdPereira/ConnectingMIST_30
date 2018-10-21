@@ -37,6 +37,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         LocationListener{
 
     private GoogleMap mMap;
+    Intent myIntent;
+    String sss=null;
     private GoogleApiClient client;
     private LocationRequest locationRequest;
     private Location lastLocation;
@@ -59,6 +61,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+        myIntent=getIntent();
+        if (myIntent.hasExtra("Locate")){
+               sss=myIntent.getStringExtra("Locate");
+        }
+
 
 
          if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
@@ -102,15 +109,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         LatLng academic=new LatLng(23.838005, 90.358916);
         LatLng atm=new LatLng(23.838670, 90.358564);
         float zoomLevel = 16.0f;
-        mMap.addMarker(new MarkerOptions().position(MIST).title("MIST"));
+        int x=1;
+        if(sss.equals("tower1"))mMap.addMarker(new MarkerOptions().position(MIST).title("MIST")).showInfoWindow();
         //mMap.addMarker(new MarkerOptions().position(lala).title("lala"));
-        mMap.addMarker(new MarkerOptions().position(cafe).title("MIST Cafeteria")).showInfoWindow();
-        mMap.addMarker(new MarkerOptions().position(playground).title("MIST Playground")).showInfoWindow();
-        mMap.addMarker(new MarkerOptions().position(stationary).title("MIST Stationary")).showInfoWindow();
-        mMap.addMarker(new MarkerOptions().position(cp).title("CP Five Star")).showInfoWindow();
-        mMap.addMarker(new MarkerOptions().position(osmany).title("MIST Tower 2")).showInfoWindow();
-        mMap.addMarker(new MarkerOptions().position(academic).title("MIST Admin Building")).showInfoWindow();
-        mMap.addMarker(new MarkerOptions().position(atm).title("Trust ATM Booth")).showInfoWindow();
+        if(sss.equals("cafe"))mMap.addMarker(new MarkerOptions().position(cafe).title("MIST Cafeteria")).showInfoWindow();
+        if(x==2)mMap.addMarker(new MarkerOptions().position(playground).title("MIST Playground")).showInfoWindow();
+        if(sss.equals("stationary"))mMap.addMarker(new MarkerOptions().position(stationary).title("MIST Stationary")).showInfoWindow();
+        if(sss.equals("cp"))mMap.addMarker(new MarkerOptions().position(cp).title("CP Five Star")).showInfoWindow();
+        if(sss.equals("tower2"))mMap.addMarker(new MarkerOptions().position(osmany).title("MIST Tower 2")).showInfoWindow();
+        if(sss.equals("admin"))mMap.addMarker(new MarkerOptions().position(academic).title("MIST Admin Building")).showInfoWindow();
+        if(sss.equals("trust"))mMap.addMarker(new MarkerOptions().position(atm).title("Trust ATM Booth")).showInfoWindow();
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(cafe, zoomLevel));
         //mMap.setOnMyLocationButtonClickListener(onMyLocationButtonClickListener);
         //mMap.setOnMyLocationClickListener(onMyLocationClickListener);

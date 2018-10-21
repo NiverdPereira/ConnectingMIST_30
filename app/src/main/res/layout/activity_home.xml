@@ -155,6 +155,13 @@
                     android:textSize="25sp" />
             </RelativeLayout>
         </android.support.v7.widget.CardView>
+        <TextView
+            android:id="@+id/tVerify"
+            android:layout_width="300dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center_horizontal"
+            android:textAlignment="center"/>
 
     </LinearLayout>
 

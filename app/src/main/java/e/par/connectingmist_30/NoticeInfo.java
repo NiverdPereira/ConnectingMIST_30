@@ -3,8 +3,8 @@ package e.par.connectingmist_30;
 public class NoticeInfo {
     String details,date,headline;
 
-    public NoticeInfo(String notice, String date,String headline) {
-        this.details = notice;
+    public NoticeInfo(String date, String details,String headline) {
+        this.details = details;
         this.date = date;
         this.headline=headline;
     }
@@ -16,8 +16,8 @@ public class NoticeInfo {
         return details;
     }
 
-    public void setDetails(String notice) {
-        this.details = notice;
+    public void setDetails(String details) {
+        this.details = details;
     }
 
     public String getDate() {
