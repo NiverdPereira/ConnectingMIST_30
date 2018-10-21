@@ -75,7 +75,7 @@ public class HomeActivity extends AppCompatActivity {
         club=findViewById(R.id.clubCard);
         //iAdmin=findViewById(R.id.iAdmin);
         logout=findViewById(R.id.logout);
-        nov=findViewById(R.id.nov);
+        //nov=findViewById(R.id.nov);
 
         refDatabase= FirebaseDatabase.getInstance().getReference("Notice");
         allNotice = new ArrayList<>();
@@ -112,6 +112,7 @@ public class HomeActivity extends AppCompatActivity {
 
         tt=0;
 
+        allNotice.clear();
         handler = new Handler();
         final int delay = 5000; //milliseconds
 
@@ -135,12 +136,12 @@ public class HomeActivity extends AppCompatActivity {
                 startActivity(feedIntent);
             }
         });
-        nov.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
+//        nov.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//            }
+//        });
         location.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -219,56 +220,57 @@ public class HomeActivity extends AppCompatActivity {
     public void notifi()
     {
         getAlldataFromDB();
-        Date now = new Date();
-        Date current= new Date(  ),prevdate=new Date();
-        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yy");
-        String nowAsString = new SimpleDateFormat("MM/dd/yy").format(now);
-        try {
-            current = sdf.parse( nowAsString );
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        mPreferences = getSharedPreferences( "Session", MODE_PRIVATE );
-        String st = mPreferences.getString("date", "");
-        try {
-            prevdate = sdf.parse( st );
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        String temp;
-        Date d= new Date(  );
-        int f=0;
-        int fm=0;
-        for(int i=0;i<allNotice.size();i++) {
-            temp = allNotice.get( i ).getDate();
-            try {
-                d = sdf.parse( temp );
-                //if(d.compareTo(prevdate) > 0 && mark.get( i )!=1 )
-                if(mark.get(i).equals( 0 ))
-                {
-                    f++;
-                   // startService(new Intent(getApplicationContext(), NotificationService.class));
-                    sendNotification(f, allNotice.get( i ).headline.trim());
-                    SharedPreferences.Editor editor = mPreferences.edit();
-                    editor.putString( "date", nowAsString );
-
-
-                    //mark.add( i,1 );
-                    mark.set( i,1 );
-                    editor.putInt( "flag", mark.get( i ) );
-                    editor.commit();
-                    //break;
-                }
-                else
-                {
-                    fm++;
-                    SharedPreferences.Editor editor = mPreferences.edit();
-                    editor.putInt( "flagm", fm );
-                    editor.commit();
-                }
-            } catch (ParseException ex) {
-            }
-        }
+//        Date now = new Date();
+//        Date current= new Date(  ),prevdate=new Date();
+//        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yy");
+//        String nowAsString = new SimpleDateFormat("MM/dd/yy").format(now);
+//        try {
+//            current = sdf.parse( nowAsString );
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//        }
+//        mPreferences = getSharedPreferences( "Session", MODE_PRIVATE );
+//
+//        String st = mPreferences.getString("date", "");
+//        try {
+//            prevdate = sdf.parse( st );
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//        }
+//        String temp;
+//        Date d= new Date(  );
+//        int f=0;
+//        int fm=0;
+//        for(int i=0;i<allNotice.size();i++) {
+//            temp = allNotice.get( i ).getDate();
+//            try {
+//                d = sdf.parse( temp );
+//                //if(d.compareTo(prevdate) > 0 && mark.get( i )!=1 )
+//                if(mark.get(i).equals( 0 ))
+//                {
+//                    f++;
+//                   // startService(new Intent(getApplicationContext(), NotificationService.class));
+//                  //  sendNotification(f, allNotice.get( i ).headline.trim());
+//                    SharedPreferences.Editor editor = mPreferences.edit();
+//                    editor.putString( "date", nowAsString );
+//
+//
+//                    //mark.add( i,1 );
+//                    mark.set( i,1 );
+//                    editor.putInt( "flag", mark.get( i ) );
+//                    editor.commit();
+//                    //break;
+//                }
+//                else
+//                {
+//                    fm++;
+//                    SharedPreferences.Editor editor = mPreferences.edit();
+//                    editor.putInt( "flagm", fm );
+//                    editor.commit();
+//                }
+//            } catch (ParseException ex) {
+//            }
+//        }
     }
 
     public void sendNotification(int tt,String s) {
@@ -300,23 +302,39 @@ public class HomeActivity extends AppCompatActivity {
         refDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                int flg=0;
                 for(DataSnapshot data: dataSnapshot.getChildren()){
                     NoticeInfo value= data.getValue(NoticeInfo.class);
+                    String check= ""+value.getDate().trim();
+                    check=check+value.getHeadline().trim();
 
-                    int flg=0;
+
+
+                    int tmp=0;
                     for(int i=0;i<allNotice.size();i++) {
-                        if(allNotice.get( i ).getHeadline().trim().equals( value.getHeadline().trim() ))
+                        String  c2= allNotice.get( i ).getDate().trim();
+                        c2=c2+ allNotice.get( i ).getHeadline().trim();
+                        if(c2.equals( check ))
                         {
-                            flg=1;break;
+                            tmp=1;
                         }
                     }
 
-                    if(flg==0)
+                    if(tmp==0)
                     {
                         allNotice.add( value );
-                        mark.add( 0 );
+                        flg++;
                     }
                     p[0]++;
+                }
+                if(flg!=0)
+                {
+                    mPreferences = getSharedPreferences( "Session", MODE_PRIVATE );
+                    SharedPreferences.Editor editor = mPreferences.edit();
+                    editor.putInt( "lol", flg );
+                    editor.commit();
+                    sendNotification( flg,"d" );
+                    mark.add( 0 );
                 }
                 Toast.makeText(getApplicationContext(),"Invalid info",Toast.LENGTH_SHORT);
 
