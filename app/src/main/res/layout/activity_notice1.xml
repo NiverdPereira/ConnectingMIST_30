@@ -12,8 +12,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
-
+            android:orientation="vertical"
+            android:background="@drawable/wallpaper3">
             <TextView
                 android:id="@+id/tTitle"
                 android:layout_width="match_parent"
@@ -27,25 +27,39 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Headline"
                 android:visibility="visible"
                 android:drawableLeft="@drawable/ic_action_notice"/>
-            <EditText
-                android:id="@+id/editText1"
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
-                android:hint="Search here"
-                android:layout_marginLeft="28dp"
-                android:ems="10" />
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Notice Overview"
-                android:id="@+id/nov"/>
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/editText1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:hint="Search"
+                    android:layout_marginLeft="28dp"
+                    android:layout_marginRight="15dp"
+                    android:ems="10"/>
+
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/nov"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|end"
+                    android:src="@drawable/calendar"/>
+
+
+            </LinearLayout>
 
             <ListView
+                android:background="@drawable/wallpaper3"
                 android:id="@+id/listnotice"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+            />
 
         </LinearLayout>
     </RelativeLayout>

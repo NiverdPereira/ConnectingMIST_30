@@ -137,7 +137,7 @@
             android:layout_height="45dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="10dp"
-            app:cardBackgroundColor="#00695c"
+            app:cardBackgroundColor="#00796b"
             app:cardCornerRadius="25dp">
 
             <RelativeLayout
